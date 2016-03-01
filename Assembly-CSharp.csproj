@@ -45,12 +45,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\LevelManager.cs" />
      <Compile Include="Assets\Scripts\BGScripts\BGCollector.cs" />
      <Compile Include="Assets\Scripts\BGScripts\BGSpawner.cs" />
      <Compile Include="Assets\Scripts\CameraScripts\CameraScript.cs" />
+     <Compile Include="Assets\Scripts\CloudScript\CloudCollectorScript.cs" />
+     <Compile Include="Assets\Scripts\CloudScript\CloudSpawnerScript.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerScript.cs" />
-     <None Include="Assets\codeandweb.com\Editor\SettingsTexturePackerImporter.txt" />
-     <None Include="Assets\codeandweb.com\Readme.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>E:/Unity5.3/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

@@ -119,7 +119,7 @@ void PlayerWalkMobile() {
 			
 			// turn the player to face right
 			Vector3 scale = transform.localScale;
-			scale.x = 1;
+			scale.x = 0.5f;
 			transform.localScale = scale;
 			
 			// animate the walk
@@ -134,7 +134,7 @@ void PlayerWalkMobile() {
 			
 			// turn the player to face left
 			Vector3 scale = transform.localScale;
-			scale.x = -1;
+			scale.x = -0.5f;
 			transform.localScale = scale;
 			
 			// animate the walk
