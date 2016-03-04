@@ -11,13 +11,16 @@ public class CloudSpawnerScript : MonoBehaviour {
 
     private GameObject[] cloudsInGame;	
 	
-	public float distanceBetweenClouds = 3.0f; // distancate between y position of the cluds
+	public float distanceBetweenClouds = 1.5f; // distancate between y position of the cluds
 	
 	public  float minX, maxX; // min and max x for clouds
 
 	private PlayerScript playerScript;  // player script
 	
 	private float lastCloudPositionY; 
+
+    [SerializeField]
+	private GameObject [] collectables;
 
 
 
@@ -27,14 +30,22 @@ public class CloudSpawnerScript : MonoBehaviour {
 
     	Vector2 g = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
         
-        maxX = g.x - 0.8f;
-        minX = -g.x + 0.8f;
+        maxX = g.x - 0.5f;
+        minX = -g.x + 0.5f;
 
         float center = Screen.width / Screen.height; // center of the sceen)
      
       CreateClouds (center);
 
-     }
+
+  	for (int i = 0; i< collectables.Length; i++)
+  	{
+  		collectables[i] = Instantiate(collectables[i]) as GameObject;
+        collectables[i].SetActive(false);
+
+    }
+
+}
 
 
     void Start()
@@ -65,6 +76,7 @@ public class CloudSpawnerScript : MonoBehaviour {
 				Shuffle(clouds);
 				
 				
+				
 				for(int i = 0; i < clouds.Length; i++)
 				 {
 					
@@ -81,8 +93,40 @@ public class CloudSpawnerScript : MonoBehaviour {
 						clouds[i].transform.position = temp;
 						clouds[i].SetActive(true);
 						
+						int random = Random.Range(0, collectables.Length);
 						
-						
+						if(clouds[i].tag != "Deadly") 
+						{
+							
+							if(!collectables[random].activeInHierarchy)
+							 {
+
+								  if(collectables[random].tag == "Life") 
+								  {
+
+									if(PlayerScript.lifeCount < 2) 
+									{ Debug.Log("LIFE!!");
+									  collectables[random].SetActive(true);
+									  collectables[random].transform.position = new Vector3(clouds[i].transform.position.x - 0.2f,
+										                                                        clouds[i].transform.position.y + 0.7f,
+										                                                        clouds[i].transform.position.z);
+									}
+
+								  } // if tag == life
+								    else 
+								   {
+                                    Debug.Log("OOON!");
+									collectables[random].SetActive(true);
+									collectables[random].transform.position = new Vector3(clouds[i].transform.position.x - 0.2f,
+									                                                      clouds[i].transform.position.y + 0.7f,
+									                                                      clouds[i].transform.position.z);
+								    } //else
+
+						       
+
+						    }// if not actie in Heirachy
+
+						} // if not Deadly
 						
 					} // if clouds is not activate
 					

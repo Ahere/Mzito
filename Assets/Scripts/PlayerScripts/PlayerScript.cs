@@ -6,7 +6,21 @@ public class PlayerScript : MonoBehaviour {
 	public float speed = 8.0f;	// the speed by which the player moves
 	public float maxVelocity = 3.0f;	// maximum velocity of the player
 
-	private Animator animator;	// players animator for animation controlce to the camera script
+	private Animator animator;	    // players animator for animation controlce to the camera script
+
+	public AudioClip lifeSound;     // Sounds
+	public AudioClip coinSound;
+
+	public Vector3 boundaries;      // player boundaries
+
+	public static int lifeCount;	// life counter
+	public static int coinCount;	// coin counter
+	public static int scoreCount;	// score counter
+
+	public bool countPoints;	// boolean value to control the point count, initialy it is set to true but when the player dies it will be
+	// set to false to prevent score count while the player is dead
+	// 
+    public Vector3 lastPosition;  //Players Last position.
 
 
 
@@ -16,7 +30,53 @@ public class PlayerScript : MonoBehaviour {
 		//Time.timeScale = 0.0f;
 		animator = GetComponent<Animator> ();	// getting the animator reference
 		//countTouches = 0;
+		 countPoints = true;
+		 scoreCount = 0;
+		 lastPosition = transform.position;    // sets last position as start position.
+
+		 boundaries = Camera.main.ScreenToWorldPoint(new Vector3 (Screen.width, 0, 0)); // getting player boundaries
+
+		
 	
+	}
+
+
+	void SetScore() 
+
+	{ 
+		if (countPoints) 
+		{
+
+			if (transform.position.y < lastPosition.y)
+			{
+
+				scoreCount++;
+			}
+		lastPosition = transform.position;
+
+		}
+
+
+
+	}
+
+
+	void CheckBounds() {
+
+		// check if the players x is greather than the x of the boundaries, if its true set the players x to be boundaries x
+		if (transform.position.x > boundaries.x) {
+			Vector3 temp = transform.position;
+			temp.x = boundaries.x;
+			transform.position = temp;
+		}
+
+		// check if the players x is less than the x of the boundaries, if its true set the players x to be negative boundaries x
+		if (transform.position.x < (-boundaries.x)) {
+			Vector3 temp = transform.position;
+			temp.x = -boundaries.x;
+			transform.position = temp;
+		}
+
 	}
 
 
@@ -34,9 +94,11 @@ public class PlayerScript : MonoBehaviour {
 			
 			PlayerWalkMobile ();
 
+			CheckBounds();
+
 			
 			//if(countTouches > 3) {
-			//	SetScore ();
+				SetScore ();
 			//}
 
 		}
@@ -67,7 +129,7 @@ void PlayerWalkMobile() {
 					
 					// turn the player to face right
 					Vector3 scale = transform.localScale;
-					scale.x = 1;
+					scale.x = 0.5f;
 					transform.localScale = scale;
 					
 					// animate the walk
@@ -82,7 +144,7 @@ void PlayerWalkMobile() {
 					
 					// turn the player to face right
 					Vector2 scale = transform.localScale;
-					scale.x = -1;
+					scale.x = -0.5f;
 					transform.localScale = scale;
 					
 					// animate the walk
@@ -149,6 +211,40 @@ void PlayerWalkMobile() {
 		
 		// add force to rigid body to move the player
 	GetComponent<Rigidbody2D>().AddForce(new Vector2 (force, 0));
+
+	}
+
+
+
+
+	void OnTriggerEnter2D(Collider2D target)
+	{
+       if (target.tag == "Life" )
+       {
+
+        lifeCount++;
+        scoreCount += 300;
+       	AudioSource.PlayClipAtPoint(lifeSound , target.transform.position );
+       	target.gameObject.SetActive(false);
+
+
+
+       }
+
+      if (target.tag == "Coins")
+      {  
+      	coinCount++;
+      	scoreCount += 200;
+      	AudioSource.PlayClipAtPoint(coinSound , target.transform.position );
+       	target.gameObject.SetActive(false);
+
+
+      }
+
+      if (target.tag == "Boundary")
+      {
+      	Debug.Log("The player is out of bounds");
+      }
 
 	}
 
