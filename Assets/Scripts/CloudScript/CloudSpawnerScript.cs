@@ -11,9 +11,9 @@ public class CloudSpawnerScript : MonoBehaviour {
 
     private GameObject[] cloudsInGame;	
 	
-	public float distanceBetweenClouds = 1.5f; // distancate between y position of the cluds
+	public float distanceBetweenClouds = 1; // distancate between y position of the cluds
 	
-	public  float minX, maxX; // min and max x for clouds
+	public static  float minX, maxX; // min and max x for clouds
 
 	private PlayerScript playerScript;  // player script
 	

@@ -3,29 +3,70 @@ using System.Collections;
 
 public class CameraScript : MonoBehaviour {
 
-    public float speed = 1.0f;
-	public float acceleration = 0.2f;
-	public float maxSpeed = 3.2f;
-	public float smooth = 0.1f;
+
+    [SerializeField]
+	private float speed = 1.0f;
+	[SerializeField]
+	private float acceleration = 0.2f;
+
+	private float maxSpeed = 3.0f;
+	private float smooth = 0.1f;
 
 
+    [SerializeField]
+	private float easySpeed = 2.4f;
+	[SerializeField]
+	private float mediumSpeed = 3.0f;
+	[SerializeField]
+	private float hardSpeed = 3.5f;
+    [SerializeField]
+	public bool moveCamera;
+
+	private int targetWidth = 480;
+//	private int targetHeight = 800;
+	
+	private float pixelToUnits = 100.0f;
+
+	void Awake() {
+
+		ScaleByWidth ();
+		
+		Vector3 t = Camera.main.ScreenToWorldPoint (new Vector3 (Screen.width, Screen.height, Camera.main.transform.position.z));
+		
+		CloudSpawnerScript.maxX = t.x - 0.5f;
+		CloudSpawnerScript.minX = -t.x + 0.5f;
+	}
 
 	// Use this for initialization
 	void Start () {
 
-		
+		moveCamera = true;
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void LateUpdate () {
+	//	MoveCameraByLerp ();
 
-	MoveCameraByLerp ();
-
-		
+		if (moveCamera) {
+			MoveCamera ();	
+		}
 
 	}
 
+	public void SetEasySpeed() 
+	{
+		this.maxSpeed = easySpeed;
+	}
 
+	public void SetMediumSpeed() 
+	{
+		this.maxSpeed = mediumSpeed;
+	}
+
+	public void SetHardSpeed() 
+	{
+		this.maxSpeed = hardSpeed;
+	}
 
 	void MoveCameraByLerp() {
 
@@ -62,6 +103,15 @@ public class CameraScript : MonoBehaviour {
 
 	}
 
-	
-}
+	void ScaleByWidth() {
+		
+		int height = Mathf.CeilToInt (targetWidth / (float)Screen.width * Screen.height);
+		
+		GetComponent<Camera>().orthographicSize = height / pixelToUnits / 2;
 
+		if (GetComponent<Camera>().orthographicSize < 3.99)
+						GetComponent<Camera>().orthographicSize = 3.99f;
+
+	}
+
+}

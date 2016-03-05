@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using System.Collections;
 
 public class PlayerScript : MonoBehaviour {
@@ -22,12 +24,26 @@ public class PlayerScript : MonoBehaviour {
 	// 
     public Vector3 lastPosition;  //Players Last position.
 
+    private CameraScript cameraScript;
 
+    private int easyDifficulty;		
+	private int mediumDifficulty;
+	private int hardDifficulty;
+
+    [SerializeField]
+	private GameObject endScoreBG;
+
+	[SerializeField]
+	private Text endScoreText;
+
+	[SerializeField]
+	private Text endCoinText;
 
 
 	// Use this for initialization
 	void Start () {
 		//Time.timeScale = 0.0f;
+		endScoreBG.SetActive (false);
 		animator = GetComponent<Animator> ();	// getting the animator reference
 		//countTouches = 0;
 		 countPoints = true;
@@ -36,7 +52,19 @@ public class PlayerScript : MonoBehaviour {
 
 		 boundaries = Camera.main.ScreenToWorldPoint(new Vector3 (Screen.width, 0, 0)); // getting player boundaries
 
+		easyDifficulty = GamePreferences.GetEasyDifficultyState ();
+		mediumDifficulty = GamePreferences.GetMediumDifficultyState ();
+		hardDifficulty = GamePreferences.GetHardDifficultyState ();
+
+
+		cameraScript = GameObject.FindGameObjectWithTag ("MainCamera").GetComponent<CameraScript> (); // camera script reference
+
+		// check if the game was started from main manu to set initial values
+		IsTheGameStartedFromMainMenu ();
 		
+		// check if the game was resumed after player died to continue the game
+		IsTheGameResumedAfterPlayerDied ();
+
 	
 	}
 
@@ -90,9 +118,9 @@ public class PlayerScript : MonoBehaviour {
 	void Update () {
 			
 			
-			PlayerWalkKeyboard ();
+			//PlayerWalkKeyboard ();
 			
-			PlayerWalkMobile ();
+			//PlayerWalkMobile ();
 
 			CheckBounds();
 
@@ -108,18 +136,19 @@ void PlayerWalkMobile() {
 		// force by which we will push the player
 		float force = 0.0f;
 		// the players velocity
-		float velocity = Mathf.Abs (GetComponent<Rigidbody2D>().velocity.x);
+		//float velocity = Mathf.Abs (GetComponent<Rigidbody2D>().velocity.x);
 
 		if (Input.touchCount > 0) {
 
-				//countTouches++;
+				
 
 				Touch h = Input.touches[0];
 				
 				Vector2 position = Camera.main.ScreenToViewportPoint(new Vector2(h.position.x, h.position.y));
-				Debug.Log(position);
+				////Debug.Log(position);
 				
-				
+				float velocity = Mathf.Abs (GetComponent<Rigidbody2D>().velocity.x);
+
 				if(position.x > 0.5) {
 					
 					// if the velocity of the player is less than the maxVelocity
@@ -128,7 +157,7 @@ void PlayerWalkMobile() {
 					}
 					
 					// turn the player to face right
-					Vector3 scale = transform.localScale;
+					Vector2 scale = transform.localScale;
 					scale.x = 0.5f;
 					transform.localScale = scale;
 					
@@ -214,41 +243,211 @@ void PlayerWalkMobile() {
 
 	}
 
-
+void IsTheGameStartedFromMainMenu() {
+		
+		int isTheGameStartedFromMainMenu = PlayerPrefs.GetInt (GamePreferences.GameStartedFromMainMenu);
+		
+		if (isTheGameStartedFromMainMenu == 1) {
+			
+			if(easyDifficulty == 1) 
+			{
+				cameraScript.SetEasySpeed();
+			}
+			
+			if(mediumDifficulty == 1) {
+				cameraScript.SetMediumSpeed();
+			}
+			
+			if(hardDifficulty == 1) {
+				cameraScript.SetHardSpeed();
+			}
+			
+			scoreCount = 0;	// score is 0
+			coinCount = 0;  // coin score is 0
+			lifeCount = 2;
+			
+			PlayerPrefs.SetInt(GamePreferences.GameStartedFromMainMenu, 0);
+			
+		}
+		
+	}
+	
+	// check if the game is resumed after player died
+	void IsTheGameResumedAfterPlayerDied() {
+		
+		int gameResumedAfterPlayerDied = PlayerPrefs.GetInt (GamePreferences.GameResumedAfterPlayerDied);
+		
+		if (gameResumedAfterPlayerDied == 1) {
+			
+			scoreCount = PlayerPrefs.GetInt(GamePreferences.CurrentScore);
+			coinCount = PlayerPrefs.GetInt(GamePreferences.CurrentCoinScore);
+			lifeCount = PlayerPrefs.GetInt(GamePreferences.CurrentLifes);
+			
+			
+			PlayerPrefs.SetInt(GamePreferences.GameResumedAfterPlayerDied, 0);
+		}
+		
+	}
 
 
 	void OnTriggerEnter2D(Collider2D target)
 	{
-       if (target.tag == "Life" )
+
+	 if (target.tag == "Coins") 
+	   {
+			coinCount++;
+			scoreCount += 200;
+			AudioSource.PlayClipAtPoint(coinSound, target.transform.position);
+			target.gameObject.SetActive (false);
+		}
+       
+     if (target.tag == "Life") 
        {
-
-        lifeCount++;
-        scoreCount += 300;
-       	AudioSource.PlayClipAtPoint(lifeSound , target.transform.position );
-       	target.gameObject.SetActive(false);
-
-
-
-       }
-
-      if (target.tag == "Coins")
-      {  
-      	coinCount++;
-      	scoreCount += 200;
-      	AudioSource.PlayClipAtPoint(coinSound , target.transform.position );
-       	target.gameObject.SetActive(false);
-
-
-      }
-
-      if (target.tag == "Boundary")
-      {
-      	Debug.Log("The player is out of bounds");
-      }
+			lifeCount++;
+			scoreCount += 300;
+			AudioSource.PlayClipAtPoint(lifeSound, target.transform.position);
+			target.gameObject.SetActive (false);
+			
+		}
+		
+	if (target.tag == "Boundary") 
+		{
+			cameraScript.moveCamera = false;
+			countPoints = false;
+			CheckGameStatus();
+		}
+		
+	if (target.tag == "Deadly") 
+		{
+			cameraScript.moveCamera = false;
+			countPoints = false;
+			CheckGameStatus();	
+		}
+		
 
 	}
 
+void CheckGameStatus() {
+		
+		// remove the player from scene by changing his x y position, and then decrement lifes
+		Vector3 temp = transform.position;
+		temp.x = 100;
+		temp.y = 100;
+		transform.position = temp;
+		lifeCount--;
+		
+		// if lifes are less than 0 end the game, get the coins and score and check it with the highscore
+		if(lifeCount < 0) {
+			
+			if(easyDifficulty == 1) {
+				
+				int currentHighscore = GamePreferences.GetEasyDifficultyHighscore();
+				int currentCoinHighscore = GamePreferences.GetEasyDifficultyCoinScore();
+				
+				if(currentHighscore < scoreCount)
+					GamePreferences.SetEasyDifficultyHighscore(scoreCount);
+				
+				if(currentCoinHighscore < coinCount) {
+					GamePreferences.SetEasyDifficultyCoinScore(coinCount);
+				}
+				
+				
+			}   // easy difficulty
+			
+			if(mediumDifficulty == 1) {
+				
+				int currentHighscore = GamePreferences.GetMediumDifficultyHighscore();
+				int currentCoinHighscore = GamePreferences.GetMediumDifficultyCoinScore();
+				
+				if(currentHighscore < scoreCount)
+					GamePreferences.SetMediumDifficultyHighscore(scoreCount);
+				
+				if(currentCoinHighscore < coinCount) {
+					GamePreferences.SetMediumDifficultyCoinScore(coinCount);
+				}
+				
+			}   // mediumDifficulty
+			
+			if(hardDifficulty == 1) {
+				
+				int currentHighscore = GamePreferences.GetHardDifficultyHighscore();
+				int currentCoinHighscore = GamePreferences.GetHardDifficultyCoinScore();
+				
+				if(currentHighscore < scoreCount)
+					GamePreferences.SetHardDifficultyHighscore(scoreCount);
+				
+				if(currentCoinHighscore < coinCount) {
+					GamePreferences.SetHardDifficultyCoinScore(coinCount);
+				}
+				
+			}   // hard difficulty
+			
+			// set the life count to be zero so that it wont display -1 on screen
+			lifeCount = 0;
+			
+			StartCoroutine(ReloadMainMenuAfterPlayerHasNoMoreLifesLeft());
+			
+			
+			// the player has still lifes left to continue the game
+		}   
 
+		else 
+		{
+			
+			PlayerPrefs.SetInt(GamePreferences.CurrentScore, scoreCount);
+			PlayerPrefs.SetInt(GamePreferences.CurrentCoinScore, coinCount);
+			PlayerPrefs.SetInt(GamePreferences.CurrentLifes, lifeCount);
+			
+			PlayerPrefs.SetInt(GamePreferences.GameResumedAfterPlayerDied, 1);
+			
+			StartCoroutine(ReloadGame());
+			
+			
+		}
+		
+	}
+	IEnumerator ReloadGame() {
+		
+		// set the fader to be active because we need it now
+		//fader.SetActive (true);
+		
+		// wait half a second before fading
+		yield return new WaitForSeconds(0.5f);
+		
+		// fade
+		//float fadeTime = fadeScript.BeginFade (1);
+		
+		//yield return new WaitForSeconds(fadeTime);
+		SceneManager.LoadScene("Gameplay");
+	}
+	
+	// reload main menu after player has no more lifes left
+	IEnumerator ReloadMainMenuAfterPlayerHasNoMoreLifesLeft() {
+		
+		// activate the end showing score gameobjects
+		endScoreBG.SetActive (true);
+		//endScoreText.rectTransform.localPosition = endScoreTextPosition;
+		//endCoinText.rectTransform.localPosition = endCoinScorePosition;
+
+		endScoreText.text = scoreCount.ToString();
+		endCoinText.text = coinCount.ToString ();
+				
+		// wait 3 seconds for the player to see the score
+		yield return new WaitForSeconds(3);
+		
+		// activate fader
+		//fader.SetActive (true);
+		
+		// set MainMenuOpenedFromGameplay to 1, so that the fader in MainMenuScene will fade smoothly
+		PlayerPrefs.SetInt (GamePreferences.MainMenuOpenedFromGameplay, 1);
+		
+		// fade
+		//float fadeTime = fadeScript.BeginFade (1);
+		//yield return new WaitForSeconds(fadeTime);
+		
+	SceneManager.LoadScene("MainMenu");
+
+}
 
 
 }
