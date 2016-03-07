@@ -39,14 +39,22 @@ public class PlayerScript : MonoBehaviour {
 	[SerializeField]
 	private Text endCoinText;
 
+	[SerializeField]
+	private GameObject ready;
+
+	[SerializeField]
+	private GameObject fader;	// fader game object reference
+
+    private GamePlayFaderScript fadeScript; // main menu fade script
+
+    public static bool isTheGameStartedFromBegining; // a boolean to control the touching in our LateUpdate so it will not interfere with our
 
 	// Use this for initialization
 	void Start () {
-		//Time.timeScale = 0.0f;
+		Time.timeScale = 0.0f;
 		endScoreBG.SetActive (false);
 		animator = GetComponent<Animator> ();	// getting the animator reference
-		//countTouches = 0;
-		 countPoints = true;
+		 
 		 scoreCount = 0;
 		 lastPosition = transform.position;    // sets last position as start position.
 
@@ -56,6 +64,9 @@ public class PlayerScript : MonoBehaviour {
 		mediumDifficulty = GamePreferences.GetMediumDifficultyState ();
 		hardDifficulty = GamePreferences.GetHardDifficultyState ();
 
+        fadeScript = fader.GetComponent<GamePlayFaderScript> (); // fader script reference
+        fader.SetActive (false);
+        isTheGameStartedFromBegining = true;
 
 		cameraScript = GameObject.FindGameObjectWithTag ("MainCamera").GetComponent<CameraScript> (); // camera script reference
 
@@ -64,8 +75,49 @@ public class PlayerScript : MonoBehaviour {
 		
 		// check if the game was resumed after player died to continue the game
 		IsTheGameResumedAfterPlayerDied ();
+    
+	
+	}
+
+	void Update () {
+				
+			PlayerWalkKeyboard ();
+			
+			PlayerWalkMobile ();
 
 	
+			//if(countTouches > 3) {
+				SetScore ();
+			//}
+
+		}
+
+
+
+	void LateUpdate() {
+
+		if (isTheGameStartedFromBegining) 
+		{
+			
+			if (Input.GetMouseButtonDown (0)) 
+			{
+				
+			//	if(adScript.bannerView != null) {
+			//		adScript.bannerView.Hide();
+			//		adScript.bannerView.Destroy();
+			//		adScript.bannerView = null;
+			//	}
+				
+				Time.timeScale = 1.0f;	
+				ready.SetActive(false);
+				countPoints = true; // score points is true initialy
+				isTheGameStartedFromBegining = false;
+				
+			}
+
+		}
+
+		CheckBounds ();
 	}
 
 
@@ -115,21 +167,7 @@ public class PlayerScript : MonoBehaviour {
 //	}
 	
 	// Update is called once per frame
-	void Update () {
-			
-			
-			//PlayerWalkKeyboard ();
-			
-			//PlayerWalkMobile ();
-
-			CheckBounds();
-
-			
-			//if(countTouches > 3) {
-				SetScore ();
-			//}
-
-		}
+	
 
 void PlayerWalkMobile() {
 
@@ -409,15 +447,15 @@ void CheckGameStatus() {
 	IEnumerator ReloadGame() {
 		
 		// set the fader to be active because we need it now
-		//fader.SetActive (true);
+		fader.SetActive (true);
 		
 		// wait half a second before fading
 		yield return new WaitForSeconds(0.5f);
 		
 		// fade
-		//float fadeTime = fadeScript.BeginFade (1);
+		float fadeTime = fadeScript.BeginFade (1);
 		
-		//yield return new WaitForSeconds(fadeTime);
+		yield return new WaitForSeconds(fadeTime);
 		SceneManager.LoadScene("Gameplay");
 	}
 	
@@ -436,14 +474,14 @@ void CheckGameStatus() {
 		yield return new WaitForSeconds(3);
 		
 		// activate fader
-		//fader.SetActive (true);
+		fader.SetActive (true);
 		
 		// set MainMenuOpenedFromGameplay to 1, so that the fader in MainMenuScene will fade smoothly
 		PlayerPrefs.SetInt (GamePreferences.MainMenuOpenedFromGameplay, 1);
 		
 		// fade
-		//float fadeTime = fadeScript.BeginFade (1);
-		//yield return new WaitForSeconds(fadeTime);
+		float fadeTime = fadeScript.BeginFade (1);
+		yield return new WaitForSeconds(fadeTime);
 		
 	SceneManager.LoadScene("MainMenu");
 

@@ -61,10 +61,6 @@ public class MainMenuControllerScript : MonoBehaviour {
 	public void HighscoreButton() 
 	{
 
-		if(!audioSource.isPlaying) 
-		{
-			AudioSource.PlayClipAtPoint(touchClip, transform.position);
-		}
 
 		
 		
@@ -190,6 +186,7 @@ void IsTheGamePlayedForTheFirstTime()
 	public void playSound ()
 	{
 		AudioSource.PlayClipAtPoint(touchClip, this.transform.position);
+		Debug.Log("SOUND");
 	}
 
 

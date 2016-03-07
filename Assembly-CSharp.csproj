@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\LevelManager.cs" />
+     <Compile Include="Assets\Scripts\BGMusic\BGMuusic.cs" />
      <Compile Include="Assets\Scripts\BGScripts\BGCollector.cs" />
      <Compile Include="Assets\Scripts\BGScripts\BGSpawner.cs" />
      <Compile Include="Assets\Scripts\BlackCloud.cs" />
@@ -53,6 +54,8 @@
      <Compile Include="Assets\Scripts\CloudScript\CloudCollectorScript.cs" />
      <Compile Include="Assets\Scripts\CloudScript\CloudSpawnerScript.cs" />
      <Compile Include="Assets\Scripts\CollectablesScripts\CollectablesScript.cs" />
+     <Compile Include="Assets\Scripts\FaderScripts\GamePlayFaderScript.cs" />
+     <Compile Include="Assets\Scripts\FaderScripts\MainMenuFaderScript.cs" />
      <Compile Include="Assets\Scripts\GamePrefrences\GamePrefrencesScript.cs" />
      <Compile Include="Assets\Scripts\HighScoreScripts\HighScoreScript.cs" />
      <Compile Include="Assets\Scripts\MainMenuScripts\MainMenuControllerScript.cs" />
