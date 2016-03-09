@@ -7,6 +7,7 @@ public class PlayerButtonMov : MonoBehaviour {
 	public float speed = 2.0f;	// the speed by which the player moves
 	public float maxVelocity = 3.0f;	// maximum velocity of the player
 	private Animator animator;
+	public float animScale = 1.0f;
 	
 
 	// Use this for initialization
@@ -29,7 +30,7 @@ public class PlayerButtonMov : MonoBehaviour {
 					
 					// turn the player to face right
 					Vector3 scale = transform.localScale;
-					scale.x = 0.5f;
+					scale.x = animScale;
 					transform.localScale = scale;
 					
 					// animate the walk
@@ -72,7 +73,7 @@ public class PlayerButtonMov : MonoBehaviour {
 					// turn the player to face right
 					
 					Vector2 scale = transform.localScale;
-					scale.x = -0.5f;
+					scale.x = -animScale;
 					transform.localScale = scale;
 					
 					// animate the walk

@@ -18,6 +18,8 @@ public class PlayerScript : MonoBehaviour {
 	public static int lifeCount;	// life counter
 	public static int coinCount;	// coin counter
 	public static int scoreCount;	// score counter
+	[SerializeField]
+	private float animScale = 1.0f ;	// scale for animator
 
 	public bool countPoints;	// boolean value to control the point count, initialy it is set to true but when the player dies it will be
 	// set to false to prevent score count while the player is dead
@@ -94,7 +96,8 @@ public class PlayerScript : MonoBehaviour {
 
 
 
-	void LateUpdate() {
+	void LateUpdate()
+	 {
 
 		if (isTheGameStartedFromBegining) 
 		{
@@ -144,14 +147,16 @@ public class PlayerScript : MonoBehaviour {
 	void CheckBounds() {
 
 		// check if the players x is greather than the x of the boundaries, if its true set the players x to be boundaries x
-		if (transform.position.x > boundaries.x) {
+		if (transform.position.x > boundaries.x)
+	    {
 			Vector3 temp = transform.position;
 			temp.x = boundaries.x;
 			transform.position = temp;
 		}
 
 		// check if the players x is less than the x of the boundaries, if its true set the players x to be negative boundaries x
-		if (transform.position.x < (-boundaries.x)) {
+		if (transform.position.x < (-boundaries.x)) 
+		{
 			Vector3 temp = transform.position;
 			temp.x = -boundaries.x;
 			transform.position = temp;
@@ -196,7 +201,7 @@ void PlayerWalkMobile() {
 					
 					// turn the player to face right
 					Vector2 scale = transform.localScale;
-					scale.x = 0.5f;
+					scale.x = animScale;
 					transform.localScale = scale;
 					
 					// animate the walk
@@ -211,7 +216,7 @@ void PlayerWalkMobile() {
 					
 					// turn the player to face right
 					Vector2 scale = transform.localScale;
-					scale.x = -0.5f;
+					scale.x = -animScale;
 					transform.localScale = scale;
 					
 					// animate the walk
@@ -248,7 +253,7 @@ void PlayerWalkMobile() {
 			
 			// turn the player to face right
 			Vector3 scale = transform.localScale;
-			scale.x = 0.5f;
+			scale.x = animScale;
 			transform.localScale = scale;
 			
 			// animate the walk
@@ -263,7 +268,7 @@ void PlayerWalkMobile() {
 			
 			// turn the player to face left
 			Vector3 scale = transform.localScale;
-			scale.x = -0.5f;
+			scale.x = -animScale;
 			transform.localScale = scale;
 			
 			// animate the walk

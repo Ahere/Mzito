@@ -43,7 +43,7 @@ public class BGSpawner : MonoBehaviour {
 				// get the size y of the collider
 				float height = ((BoxCollider2D)target).size.y;
 
-				Debug.Log("Here is the hieght" + height);
+				
 
 				// go through the array and check for inactivate gameobjects
 				for(int i = 0; i < backgrounds.Length; i++) 
@@ -53,13 +53,12 @@ public class BGSpawner : MonoBehaviour {
 					if(!backgrounds[i].activeInHierarchy) 
 					{
 
-						temp.y -= height;
+						temp.y -= (height * 2);
 						lastY = temp.y;
 
 						backgrounds[i].transform.position = temp;
 						backgrounds[i].SetActive(true);
-						Debug.Log("SpawnSpawnSpawn");
-
+						
 					} // if background is not active
 
 				} // for int i...
