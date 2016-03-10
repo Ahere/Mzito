@@ -45,6 +45,23 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\AssetStore\BallTest\Scripts\AutoForce.cs" />
+     <Compile Include="Assets\AssetStore\BallTest\Scripts\ColliderDestory.cs" />
+     <Compile Include="Assets\AssetStore\BallTest\Scripts\ColliderPortal.cs" />
+     <Compile Include="Assets\AssetStore\BallTest\Scripts\KeyDestroy.cs" />
+     <Compile Include="Assets\AssetStore\BallTest\Scripts\ObjectGenerator.cs" />
+     <Compile Include="Assets\AssetStore\BallTest\Scripts\RandomForce.cs" />
+     <Compile Include="Assets\AssetStore\BallTest\Scripts\iTween\Plugins\iTween.cs" />
+     <Compile Include="Assets\AssetStore\BallTest\Scripts\iTween\Sample\MoveSample.cs" />
+     <Compile Include="Assets\AssetStore\BallTest\Scripts\iTween\Sample\RotateSample.cs" />
+     <Compile Include="Assets\AssetStore\BallTest\Scripts\iTween\Sample\SampleInfo.cs" />
+     <Compile Include="Assets\AssetStore\DevManager\Scripts\DevDetectLeak.cs" />
+     <Compile Include="Assets\AssetStore\DevManager\Scripts\DevLogViewer.cs" />
+     <Compile Include="Assets\AssetStore\DevManager\Scripts\DevManager.cs" />
+     <Compile Include="Assets\AssetStore\DevManager\Scripts\Sub\DevSingleTon.cs" />
+     <Compile Include="Assets\AssetStore\DevManager\Scripts\Sub\DevWindowTask.cs" />
+     <Compile Include="Assets\AssetStore\DevManager\Scripts\Sub\MonoBehaviourDev.cs" />
+     <Compile Include="Assets\AssetStore\DevManager\Scripts\Sub\Texture2DExtensions.cs" />
      <Compile Include="Assets\Scripts\BGMusic\BGMuusic.cs" />
      <Compile Include="Assets\Scripts\BGScripts\BGCollector.cs" />
      <Compile Include="Assets\Scripts\BGScripts\BGSpawner.cs" />
@@ -137,6 +154,7 @@
      <None Include="Assets\unity-ui-extensions\Shaders\SoftMaskShaderText.shader" />
      <None Include="Assets\unity-ui-extensions\Shaders\SoftMaskShader.shader" />
      <None Include="Assets\unity-ui-extensions\Shaders\UIImageCrop.shader" />
+     <None Include="Assets\AssetStore\BallTest\Scripts\iTween\ReadMe!\ReadMe!.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>E:/Unity5.3/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

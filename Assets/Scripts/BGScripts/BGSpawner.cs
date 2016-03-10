@@ -53,7 +53,7 @@ public class BGSpawner : MonoBehaviour {
 					if(!backgrounds[i].activeInHierarchy) 
 					{
 
-						temp.y -= (height * 2);
+						temp.y -= (height * 1.5f);
 						lastY = temp.y;
 
 						backgrounds[i].transform.position = temp;

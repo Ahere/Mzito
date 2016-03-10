@@ -52,6 +52,7 @@
      <None Include="Assets\unity-ui-extensions\Shaders\SoftMaskShaderText.shader" />
      <None Include="Assets\unity-ui-extensions\Shaders\SoftMaskShader.shader" />
      <None Include="Assets\unity-ui-extensions\Shaders\UIImageCrop.shader" />
+     <None Include="Assets\AssetStore\BallTest\Scripts\iTween\ReadMe!\ReadMe!.txt" />
  <Reference Include="UnityEditor.Advertisements">
  <HintPath>E:/Unity5.3/Editor/Data/UnityExtensions/Unity/Advertisements/Editor/UnityEditor.Advertisements.dll</HintPath>
  </Reference>
