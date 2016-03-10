@@ -65,8 +65,8 @@
      <Compile Include="Assets\Scripts\BGMusic\BGMuusic.cs" />
      <Compile Include="Assets\Scripts\BGScripts\BGCollector.cs" />
      <Compile Include="Assets\Scripts\BGScripts\BGSpawner.cs" />
-     <Compile Include="Assets\Scripts\BlackCloud.cs" />
      <Compile Include="Assets\Scripts\CameraScripts\CameraScript.cs" />
+     <Compile Include="Assets\Scripts\CloudScript\BlackCloud.cs" />
      <Compile Include="Assets\Scripts\CloudScript\CloudCollectorScript.cs" />
      <Compile Include="Assets\Scripts\CloudScript\CloudSpawnerScript.cs" />
      <Compile Include="Assets\Scripts\CollectablesScripts\CollectablesScript.cs" />
@@ -74,12 +74,13 @@
      <Compile Include="Assets\Scripts\FaderScripts\MainMenuFaderScript.cs" />
      <Compile Include="Assets\Scripts\GamePrefrences\GamePrefrencesScript.cs" />
      <Compile Include="Assets\Scripts\HighScoreScripts\HighScoreScript.cs" />
-     <Compile Include="Assets\Scripts\LevelManager.cs" />
      <Compile Include="Assets\Scripts\MainMenuScripts\MainMenuControllerScript.cs" />
      <Compile Include="Assets\Scripts\OptionsScripts\OptionsMenuScripts.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerButtonMov.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerScript.cs" />
+     <Compile Include="Assets\Scripts\UIElemScripts\Ready.cs" />
      <Compile Include="Assets\Scripts\UIElemScripts\UIElementsScripts.cs" />
+     <Compile Include="Assets\Scripts\UIElemScripts\UIPauseScript.cs" />
      <Compile Include="Assets\unity-ui-extensions\Scripts\Accordion\Accordion.cs" />
      <Compile Include="Assets\unity-ui-extensions\Scripts\Accordion\AccordionElement.cs" />
      <Compile Include="Assets\unity-ui-extensions\Scripts\Accordion\Tweening\FloatTween.cs" />

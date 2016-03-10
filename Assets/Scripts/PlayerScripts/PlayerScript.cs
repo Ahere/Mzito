@@ -83,10 +83,13 @@ public class PlayerScript : MonoBehaviour {
 
 	void Update () {
 				
+			if (Time.timeScale == 1.0f) 
+			{
+			
 			PlayerWalkKeyboard ();
 			
 			PlayerWalkMobile ();
-
+			}
 	
 			//if(countTouches > 3) {
 				SetScore ();
@@ -112,7 +115,7 @@ public class PlayerScript : MonoBehaviour {
 			//	}
 				
 				Time.timeScale = 1.0f;	
-				ready.SetActive(false);
+				
 				countPoints = true; // score points is true initialy
 				isTheGameStartedFromBegining = false;
 				

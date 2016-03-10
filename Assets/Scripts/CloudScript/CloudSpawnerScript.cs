@@ -108,7 +108,7 @@ public class CloudSpawnerScript : MonoBehaviour {
 									{ Debug.Log("LIFE!!");
 									  collectables[random].SetActive(true);
 									  collectables[random].transform.position = new Vector3(clouds[i].transform.position.x - 0.2f,
-										                                                        clouds[i].transform.position.y + 0.7f,
+										                                                        clouds[i].transform.position.y + 0.4f,
 										                                                        clouds[i].transform.position.z);
 									}
 
@@ -118,7 +118,7 @@ public class CloudSpawnerScript : MonoBehaviour {
                                     Debug.Log("OOON!");
 									collectables[random].SetActive(true);
 									collectables[random].transform.position = new Vector3(clouds[i].transform.position.x - 0.2f,
-									                                                      clouds[i].transform.position.y + 0.7f,
+									                                                      clouds[i].transform.position.y + 0.4f,
 									                                                      clouds[i].transform.position.z);
 								    } //else
 
