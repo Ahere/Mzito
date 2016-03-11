@@ -11,7 +11,7 @@ public class MainMenuFaderScript : MonoBehaviour {
 	private int fadeDirection = -1;
 	private bool fade;
 	
-	void Start() {
+	void Awake() {
 		
 		int MainMenuFromGamePlay = PlayerPrefs.GetInt (GamePreferences.MainMenuOpenedFromGameplay);
 		

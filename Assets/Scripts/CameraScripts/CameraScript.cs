@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class CameraScript : MonoBehaviour {
@@ -53,6 +53,7 @@ public class CameraScript : MonoBehaviour {
 
 	}
 
+    /// Difficuulty Setters.
 	public void SetEasySpeed() 
 	{
 		this.maxSpeed = easySpeed;
@@ -68,6 +69,8 @@ public class CameraScript : MonoBehaviour {
 		this.maxSpeed = hardSpeed;
 	}
 
+	//Smoth camera movement.
+   
 	void MoveCameraByLerp() {
 
 		Vector3 temp = transform.position;

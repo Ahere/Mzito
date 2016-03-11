@@ -5,7 +5,7 @@ public class BGMuusic : MonoBehaviour {
 
 	private static BGMuusic instance;
 
-	void Start() {
+	void Awake () {
 		if(instance)
 			DestroyImmediate(gameObject);	// delete duplicate
 		else {

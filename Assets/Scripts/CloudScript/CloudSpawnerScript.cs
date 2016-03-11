@@ -45,12 +45,7 @@ public class CloudSpawnerScript : MonoBehaviour {
 
     }
 
-}
 
-
-    void Start()
-    {
- 
          playerScript = GameObject.Find("Player").GetComponent<PlayerScript>();
          
          cloudsInGame = GameObject.FindGameObjectsWithTag("Clouds");

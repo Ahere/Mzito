@@ -22,7 +22,7 @@ public class OptionsMenuScripts : MonoBehaviour {
     [SerializeField]
   private Image sign;
 	// Use this for initialization
-	void Start () 
+	void Awake () 
 	{
 	  CheckDifficulty ();
 	}

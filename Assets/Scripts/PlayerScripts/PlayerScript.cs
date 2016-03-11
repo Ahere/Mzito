@@ -52,7 +52,7 @@ public class PlayerScript : MonoBehaviour {
     public static bool isTheGameStartedFromBegining; // a boolean to control the touching in our LateUpdate so it will not interfere with our
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		Time.timeScale = 0.0f;
 		endScoreBG.SetActive (false);
 		animator = GetComponent<Animator> ();	// getting the animator reference

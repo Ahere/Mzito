@@ -7,7 +7,7 @@ public class BGSpawner : MonoBehaviour {
 	    public float lastY;
 
 	// Use this for initialization
-	void Start () 
+	void Awake () 
 	{
 
 		// getting the gameobjects with tag background

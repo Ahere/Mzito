@@ -13,7 +13,7 @@ public class HighScoreScript : MonoBehaviour {
 
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		CheckDifficultyAndSetScore ();
 		CheckDifficultyAndSetCoinScore ();
 	}

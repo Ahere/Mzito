@@ -16,7 +16,7 @@ public class MainMenuControllerScript : MonoBehaviour {
 
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 
 		Screen.sleepTimeout = SleepTimeout.NeverSleep;
 		

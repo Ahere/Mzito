@@ -16,7 +16,7 @@ public class UIElementsScripts : MonoBehaviour
 	private Text scoreText;
 
 	// Use this for initialization
-	void Start ()
+	void Awake ()
 	{
 		UpdateScore ();
 	}
@@ -33,9 +33,9 @@ public class UIElementsScripts : MonoBehaviour
 
 	void UpdateScore() 
 	{
-		lifeText.text = "x" + PlayerScript.lifeCount;
-		coinText.text = "x" + PlayerScript.coinCount;
-		scoreText.text = "" + PlayerScript.scoreCount;
+		lifeText.text = "LIVES = " + PlayerScript.lifeCount;
+		coinText.text = "COINS = " + PlayerScript.coinCount;
+		scoreText.text ="SCORE = " + PlayerScript.scoreCount;
 	}
 
 }
