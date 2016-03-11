@@ -53,6 +53,18 @@
      <None Include="Assets\unity-ui-extensions\Shaders\SoftMaskShader.shader" />
      <None Include="Assets\unity-ui-extensions\Shaders\UIImageCrop.shader" />
      <None Include="Assets\AssetStore\BallTest\Scripts\iTween\ReadMe!\ReadMe!.txt" />
+ <Reference Include="UnityEngine.Networking">
+ <HintPath>E:/Unity5.3/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.Networking">
+ <HintPath>E:/Unity5.3/Editor/Data/UnityExtensions/Unity/Networking/Editor/UnityEditor.Networking.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.UI">
+ <HintPath>E:/Unity5.3/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.UI">
+ <HintPath>E:/Unity5.3/Editor/Data/UnityExtensions/Unity/GUISystem/Editor/UnityEditor.UI.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEditor.Advertisements">
  <HintPath>E:/Unity5.3/Editor/Data/UnityExtensions/Unity/Advertisements/Editor/UnityEditor.Advertisements.dll</HintPath>
  </Reference>
@@ -61,18 +73,6 @@
  </Reference>
  <Reference Include="UnityEditor.EditorTestsRunner">
  <HintPath>E:/Unity5.3/Editor/Data/UnityExtensions/Unity/EditorTestsRunner/Editor/UnityEditor.EditorTestsRunner.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.UI">
- <HintPath>E:/Unity5.3/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
- </Reference>
- <Reference Include="UnityEditor.UI">
- <HintPath>E:/Unity5.3/Editor/Data/UnityExtensions/Unity/GUISystem/Editor/UnityEditor.UI.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Networking">
- <HintPath>E:/Unity5.3/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
- </Reference>
- <Reference Include="UnityEditor.Networking">
- <HintPath>E:/Unity5.3/Editor/Data/UnityExtensions/Unity/Networking/Editor/UnityEditor.Networking.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.TreeEditor">
  <HintPath>E:/Unity5.3/Editor/Data/UnityExtensions/Unity/TreeEditor/Editor/UnityEditor.TreeEditor.dll</HintPath>

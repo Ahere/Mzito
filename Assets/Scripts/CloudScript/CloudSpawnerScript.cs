@@ -100,7 +100,7 @@ public class CloudSpawnerScript : MonoBehaviour {
 								  {
 
 									if(PlayerScript.lifeCount < 2) 
-									{ Debug.Log("LIFE!!");
+									{ 
 									  collectables[random].SetActive(true);
 									  collectables[random].transform.position = new Vector3(clouds[i].transform.position.x - 0.2f,
 										                                                        clouds[i].transform.position.y + 0.4f,
@@ -110,7 +110,7 @@ public class CloudSpawnerScript : MonoBehaviour {
 								  } // if tag == life
 								    else 
 								   {
-                                    Debug.Log("OOON!");
+                                   
 									collectables[random].SetActive(true);
 									collectables[random].transform.position = new Vector3(clouds[i].transform.position.x - 0.2f,
 									                                                      clouds[i].transform.position.y + 0.4f,

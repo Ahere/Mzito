@@ -69,6 +69,8 @@
      <Compile Include="Assets\Scripts\CloudScript\BlackCloud.cs" />
      <Compile Include="Assets\Scripts\CloudScript\CloudCollectorScript.cs" />
      <Compile Include="Assets\Scripts\CloudScript\CloudSpawnerScript.cs" />
+     <Compile Include="Assets\Scripts\CloudScript\DealdyMovementScript.cs" />
+     <Compile Include="Assets\Scripts\CloudScript\SpinDeadlyScript.cs" />
      <Compile Include="Assets\Scripts\CollectablesScripts\CollectablesScript.cs" />
      <Compile Include="Assets\Scripts\FaderScripts\GamePlayFaderScript.cs" />
      <Compile Include="Assets\Scripts\FaderScripts\MainMenuFaderScript.cs" />
@@ -156,11 +158,11 @@
      <None Include="Assets\unity-ui-extensions\Shaders\SoftMaskShader.shader" />
      <None Include="Assets\unity-ui-extensions\Shaders\UIImageCrop.shader" />
      <None Include="Assets\AssetStore\BallTest\Scripts\iTween\ReadMe!\ReadMe!.txt" />
- <Reference Include="UnityEngine.UI">
- <HintPath>E:/Unity5.3/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
- </Reference>
  <Reference Include="UnityEngine.Networking">
  <HintPath>E:/Unity5.3/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.UI">
+ <HintPath>E:/Unity5.3/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="Mono.Cecil">
  <HintPath>E:/Unity5.3/Editor/Data/Managed/Mono.Cecil.dll</HintPath>
