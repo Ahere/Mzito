@@ -71,12 +71,14 @@
      <Compile Include="Assets\Scripts\CloudScript\CloudCollectorScript.cs" />
      <Compile Include="Assets\Scripts\CloudScript\CloudSpawnerScript.cs" />
      <Compile Include="Assets\Scripts\CloudScript\DealdyMovementScript.cs" />
+     <Compile Include="Assets\Scripts\CloudScript\DoorScript.cs" />
      <Compile Include="Assets\Scripts\CloudScript\SpinDeadlyScript.cs" />
      <Compile Include="Assets\Scripts\CollectablesScripts\CollectablesScript.cs" />
      <Compile Include="Assets\Scripts\FaderScripts\GamePlayFaderScript.cs" />
      <Compile Include="Assets\Scripts\FaderScripts\MainMenuFaderScript.cs" />
      <Compile Include="Assets\Scripts\GamePrefrences\GamePrefrencesScript.cs" />
      <Compile Include="Assets\Scripts\HighScoreScripts\HighScoreScript.cs" />
+     <Compile Include="Assets\Scripts\LevelManagerScripts\LevelManager.cs" />
      <Compile Include="Assets\Scripts\MainMenuScripts\MainMenuControllerScript.cs" />
      <Compile Include="Assets\Scripts\OptionsScripts\OptionsMenuScripts.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerButtonMov.cs" />

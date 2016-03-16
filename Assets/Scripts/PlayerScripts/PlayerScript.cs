@@ -51,6 +51,8 @@ public class PlayerScript : MonoBehaviour {
 
     public static bool isTheGameStartedFromBegining; // a boolean to control the touching in our LateUpdate so it will not interfere with our
 
+    public GameObject DoorUI;
+
 	// Use this for initialization
 	void Awake () {
 		Time.timeScale = 0.0f;
@@ -77,6 +79,7 @@ public class PlayerScript : MonoBehaviour {
 		
 		// check if the game was resumed after player died to continue the game
 		IsTheGameResumedAfterPlayerDied ();
+		DoorUI.SetActive(false);
     
 	
 	}
@@ -371,6 +374,28 @@ void IsTheGameStartedFromMainMenu() {
 		}
 		
 
+		if (target.tag =="Door") 
+		{
+			Debug.Log("OPEN THE DOOR");
+		    DoorUI.SetActive (true);
+			 //if the target is background , deactivate it
+			
+			
+		}
+
+    }
+
+	 void OnTriggerExit2D(Collider2D target) 
+    {
+
+		if (target.tag =="Door") 
+		{
+			Debug.Log("OPEN THE DOOR BUTTON");
+		    DoorUI.SetActive (false);
+			 //if the target is background , deactivate it
+			
+			
+	    }
 	}
 
 void CheckGameStatus() {

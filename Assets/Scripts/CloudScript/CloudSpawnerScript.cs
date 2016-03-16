@@ -108,6 +108,18 @@ public class CloudSpawnerScript : MonoBehaviour {
 									}
 
 								  } // if tag == life
+
+
+								 if (collectables[random].tag == "Door")
+								    {
+                                     collectables[random].SetActive(true);
+                                     collectables[random].transform.position = new Vector3(clouds[i].transform.position.x - 0.2f,
+                                     	                                                   clouds[i].transform.position.y + 0.6f,
+									                                                       clouds[i].transform.position.z);
+
+
+								    }
+
 								    else 
 								   {
                                    
@@ -115,7 +127,8 @@ public class CloudSpawnerScript : MonoBehaviour {
 									collectables[random].transform.position = new Vector3(clouds[i].transform.position.x - 0.2f,
 									                                                      clouds[i].transform.position.y + 0.4f,
 									                                                      clouds[i].transform.position.z);
-								    } //else
+								   } 
+								    
 
 						       
 
