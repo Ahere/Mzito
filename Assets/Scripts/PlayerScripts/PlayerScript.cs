@@ -51,6 +51,8 @@ public class PlayerScript : MonoBehaviour {
 
     public static bool isTheGameStartedFromBegining; // a boolean to control the touching in our LateUpdate so it will not interfere with our
 
+    public GameObject DoorUI;
+
 	// Use this for initialization
 	void Awake () {
 		Time.timeScale = 0.0f;
@@ -77,6 +79,7 @@ public class PlayerScript : MonoBehaviour {
 		
 		// check if the game was resumed after player died to continue the game
 		IsTheGameResumedAfterPlayerDied ();
+		DoorUI.SetActive(false);
     
 	
 	}
@@ -210,10 +213,15 @@ void PlayerWalkMobile() {
 					// animate the walk
 					animator.SetInteger("Walk", 1);
 					
-				} else if(position.x < 0.5) {
+				} 
+
+
+				else if(position.x < 0.5) 
+				{
 					
 					// if the velocity of the player is less than the maxVelocity
-					if(velocity < maxVelocity){
+					if(velocity < maxVelocity)
+					{
 						force = -speed;
 					}
 					
@@ -371,6 +379,31 @@ void IsTheGameStartedFromMainMenu() {
 		}
 		
 
+		if (target.tag =="Door") 
+		{
+			
+			cameraScript.moveCamera = false;
+		    DoorUI.SetActive (true);
+			 // Door open and stop the camera.
+			
+			
+		}
+
+    }
+
+	 void OnTriggerExit2D(Collider2D target) 
+    {
+
+		if (target.tag =="Door") 
+		{
+			
+		    DoorUI.SetActive (false);
+		    cameraScript.moveCamera = true;
+		    // Set door UI to false and continue camera
+			 
+			
+			
+	    }
 	}
 
 void CheckGameStatus() {
