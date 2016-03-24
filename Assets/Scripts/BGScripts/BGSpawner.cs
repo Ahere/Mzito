@@ -5,6 +5,7 @@ public class BGSpawner : MonoBehaviour {
 
 		public GameObject[] backgrounds;
 	    public float lastY;
+	    public float spawnDistance;
 
 	// Use this for initialization
 	void Awake () 
@@ -53,7 +54,7 @@ public class BGSpawner : MonoBehaviour {
 					if(!backgrounds[i].activeInHierarchy) 
 					{
 
-						temp.y -= height * 2.4f;
+						temp.y -= height * spawnDistance;
 						lastY = temp.y;
                         Debug.Log("Downtown");
 						backgrounds[i].transform.position = temp;

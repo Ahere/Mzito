@@ -112,10 +112,14 @@ public class CloudSpawnerScript : MonoBehaviour {
 
 								 if (collectables[random].tag == "Door")
 								    {
+
+								    if(PlayerScript.scoreCount > 2000) 
+								    {
                                      collectables[random].SetActive(true);
                                      collectables[random].transform.position = new Vector3(clouds[i].transform.position.x - 0.2f,
                                      	                                                   clouds[i].transform.position.y + 0.6f,
 									                                                       clouds[i].transform.position.z);
+                                    }
 
 
 								    }

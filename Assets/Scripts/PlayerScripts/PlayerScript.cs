@@ -213,10 +213,15 @@ void PlayerWalkMobile() {
 					// animate the walk
 					animator.SetInteger("Walk", 1);
 					
-				} else if(position.x < 0.5) {
+				} 
+
+
+				else if(position.x < 0.5) 
+				{
 					
 					// if the velocity of the player is less than the maxVelocity
-					if(velocity < maxVelocity){
+					if(velocity < maxVelocity)
+					{
 						force = -speed;
 					}
 					
@@ -376,9 +381,10 @@ void IsTheGameStartedFromMainMenu() {
 
 		if (target.tag =="Door") 
 		{
-			Debug.Log("OPEN THE DOOR");
+			
+			cameraScript.moveCamera = false;
 		    DoorUI.SetActive (true);
-			 //if the target is background , deactivate it
+			 // Door open and stop the camera.
 			
 			
 		}
@@ -390,9 +396,11 @@ void IsTheGameStartedFromMainMenu() {
 
 		if (target.tag =="Door") 
 		{
-			Debug.Log("OPEN THE DOOR BUTTON");
+			
 		    DoorUI.SetActive (false);
-			 //if the target is background , deactivate it
+		    cameraScript.moveCamera = true;
+		    // Set door UI to false and continue camera
+			 
 			
 			
 	    }

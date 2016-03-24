@@ -27,9 +27,9 @@ public class PlayerGyroScope : MonoBehaviour {
     { 
        
        
-        float speed = Input.acceleration.x * 0.1f;
+        float speed = Input.acceleration.x * 0.15f;
 
-        if (speed > 0)
+        if (speed > 0 &&  Time.timeScale == 1.0f)
         {
         
         // Debug.Log("rightspeed"+ speed )
@@ -38,13 +38,14 @@ public class PlayerGyroScope : MonoBehaviour {
 		player.transform.localScale = scale;
 					
 		// animate the walk
-		animator.SetInteger("Walk", 1);
+		animator.SetFloat( "WalkG", 1.0f );
 		player.transform.Translate (speed, 0 , 0);
+
 
         }
 
 
-         if (speed < 0)
+         if (speed < 0 && Time.timeScale == 1.0f)
         {
        
        
@@ -54,7 +55,7 @@ public class PlayerGyroScope : MonoBehaviour {
 		player.transform.localScale = scale;
 					
 					// animate the walk
-		 animator.SetInteger("Walk", 1);
+		 animator.SetFloat( "WalkG" , 1.0f);
 		 player.transform.Translate (speed, 0 , 0);
 
         }
