@@ -7,11 +7,13 @@ public class PlayerScript : MonoBehaviour {
 
 	public float speed = 8.0f;	// the speed by which the player moves
 	public float maxVelocity = 3.0f;	// maximum velocity of the player
-
+   
 	private Animator animator;	    // players animator for animation controlce to the camera script
 
+    public string reloadLevel;
 	public AudioClip lifeSound;     // Sounds
 	public AudioClip coinSound;
+
 
 	public Vector3 boundaries;      // player boundaries
 
@@ -245,7 +247,8 @@ void PlayerWalkMobile() {
 
 	} // player walk mobile
 
-	void PlayerWalkKeyboard() {
+	void PlayerWalkKeyboard() 
+	{
 
 		// force by which we will push the player
 		float force = 0.0f;
@@ -416,9 +419,11 @@ void CheckGameStatus() {
 		lifeCount--;
 		
 		// if lifes are less than 0 end the game, get the coins and score and check it with the highscore
-		if(lifeCount < 0) {
+		if(lifeCount < 0) 
+		{
 			
-			if(easyDifficulty == 1) {
+			if(easyDifficulty == 1) 
+			{
 				
 				int currentHighscore = GamePreferences.GetEasyDifficultyHighscore();
 				int currentCoinHighscore = GamePreferences.GetEasyDifficultyCoinScore();
@@ -426,14 +431,16 @@ void CheckGameStatus() {
 				if(currentHighscore < scoreCount)
 					GamePreferences.SetEasyDifficultyHighscore(scoreCount);
 				
-				if(currentCoinHighscore < coinCount) {
+				if(currentCoinHighscore < coinCount) 
+				{
 					GamePreferences.SetEasyDifficultyCoinScore(coinCount);
 				}
 				
 				
 			}   // easy difficulty
 			
-			if(mediumDifficulty == 1) {
+			if(mediumDifficulty == 1) 
+			{
 				
 				int currentHighscore = GamePreferences.GetMediumDifficultyHighscore();
 				int currentCoinHighscore = GamePreferences.GetMediumDifficultyCoinScore();
@@ -441,13 +448,15 @@ void CheckGameStatus() {
 				if(currentHighscore < scoreCount)
 					GamePreferences.SetMediumDifficultyHighscore(scoreCount);
 				
-				if(currentCoinHighscore < coinCount) {
+				if(currentCoinHighscore < coinCount) 
+			    {
 					GamePreferences.SetMediumDifficultyCoinScore(coinCount);
-				}
+			    }
 				
 			}   // mediumDifficulty
 			
-			if(hardDifficulty == 1) {
+			if(hardDifficulty == 1) 
+			{
 				
 				int currentHighscore = GamePreferences.GetHardDifficultyHighscore();
 				int currentCoinHighscore = GamePreferences.GetHardDifficultyCoinScore();
@@ -455,9 +464,10 @@ void CheckGameStatus() {
 				if(currentHighscore < scoreCount)
 					GamePreferences.SetHardDifficultyHighscore(scoreCount);
 				
-				if(currentCoinHighscore < coinCount) {
+				if(currentCoinHighscore < coinCount) 
+				{
 					GamePreferences.SetHardDifficultyCoinScore(coinCount);
-				}
+			    }
 				
 			}   // hard difficulty
 			
@@ -497,7 +507,7 @@ void CheckGameStatus() {
 		float fadeTime = fadeScript.BeginFade (1);
 		
 		yield return new WaitForSeconds(fadeTime);
-		SceneManager.LoadScene("Gameplay");
+		SceneManager.LoadScene(reloadLevel);
 	}
 	
 	// reload main menu after player has no more lifes left
