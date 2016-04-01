@@ -1,0 +1,42 @@
+Initialize engine version: 5.3.0f4 (2524e04062b4)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce 610M (ID=0x105a)
+    Vendor:   NVIDIA
+    VRAM:     979 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: D:\Documents\GitHub\Mzito\PCbuild\Mzito_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading D:\Documents\GitHub\Mzito\PCbuild\Mzito_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: D:\Documents\GitHub\Mzito\PCbuild\Mzito_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading D:\Documents\GitHub\Mzito\PCbuild\Mzito_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: D:\Documents\GitHub\Mzito\PCbuild\Mzito_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading D:\Documents\GitHub\Mzito\PCbuild\Mzito_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: D:\Documents\GitHub\Mzito\PCbuild\Mzito_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading D:\Documents\GitHub\Mzito\PCbuild\Mzito_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+- Completed reload, in  0.261 seconds
+Platform assembly: D:\Documents\GitHub\Mzito\PCbuild\Mzito_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: D:\Documents\GitHub\Mzito\PCbuild\Mzito_Data\Managed\System.dll (this message is harmless)
+<RI> Initializing input.
+<RI> Input initialized.
+desktop: 1366x768 60Hz; virtual: 1366x768 at 0,0
+<RI> Initialized touch support.
+UnloadTime: 1.523803 ms
+Setting up 1 worker threads for Enlighten.
+  Thread -> id: 159c -> priority: 1 
+SOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 37)
+
+Unloading 7 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 16.190243 ms
+
+Unloading 65 unused Assets to reduce memory usage. Loaded Objects now: 580.
+Total: 1.392171 ms (FindLiveObjects: 0.117799 ms CreateObjectMapping: 0.125830 ms MarkObjects: 1.055283 ms  DeleteObjects: 0.091919 ms)
+
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 1.652757 ms
+
+Unloading 48 unused Assets to reduce memory usage. Loaded Objects now: 610.
+Total: 1.450178 ms (FindLiveObjects: 0.111106 ms CreateObjectMapping: 0.109321 ms MarkObjects: 1.163712 ms  DeleteObjects: 0.063807 ms)
+

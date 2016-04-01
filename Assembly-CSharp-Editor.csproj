@@ -45,6 +45,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\TouchControlsKit\Scripts\Editor\CustomInspectors\Base\BaseInspector.cs" />
+     <Compile Include="Assets\TouchControlsKit\Scripts\Editor\CustomInspectors\TCKButtonEditor.cs" />
+     <Compile Include="Assets\TouchControlsKit\Scripts\Editor\CustomInspectors\TCKDPadArrowEditor.cs" />
+     <Compile Include="Assets\TouchControlsKit\Scripts\Editor\CustomInspectors\TCKDPadEditor.cs" />
+     <Compile Include="Assets\TouchControlsKit\Scripts\Editor\CustomInspectors\TCKJoystickEditor.cs" />
+     <Compile Include="Assets\TouchControlsKit\Scripts\Editor\CustomInspectors\TCKSteeringWheelEditor.cs" />
+     <Compile Include="Assets\TouchControlsKit\Scripts\Editor\CustomInspectors\TCKTouchpadEditor.cs" />
+     <Compile Include="Assets\TouchControlsKit\Scripts\Editor\InspectorHelpers\AxesHelper.cs" />
+     <Compile Include="Assets\TouchControlsKit\Scripts\Editor\InspectorHelpers\EventsHelper.cs" />
+     <Compile Include="Assets\TouchControlsKit\Scripts\Editor\InspectorHelpers\ParametersHelper.cs" />
+     <Compile Include="Assets\TouchControlsKit\Scripts\Editor\InspectorHelpers\StyleHelper.cs" />
+     <Compile Include="Assets\TouchControlsKit\Scripts\Editor\PrefabCreating\PrefabCreator.cs" />
      <Compile Include="Assets\unity-ui-extensions\Scripts\Accordion\Editor\AccordionElementEditor.cs" />
      <Compile Include="Assets\unity-ui-extensions\Scripts\Editor\CanvasGroupActivator.cs" />
      <Compile Include="Assets\unity-ui-extensions\Scripts\Editor\UIExtensionsMenuOptions.cs" />
@@ -52,7 +64,7 @@
      <None Include="Assets\unity-ui-extensions\Shaders\SoftMaskShaderText.shader" />
      <None Include="Assets\unity-ui-extensions\Shaders\SoftMaskShader.shader" />
      <None Include="Assets\unity-ui-extensions\Shaders\UIImageCrop.shader" />
-     <None Include="Assets\AssetStore\BallTest\Scripts\iTween\ReadMe!\ReadMe!.txt" />
+     <None Include="Assets\TouchControlsKit\zExamples\ReadMeToo.txt" />
  <Reference Include="UnityEngine.Networking">
  <HintPath>E:/Unity5.3/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
  </Reference>

@@ -33,9 +33,9 @@ public class UIElementsScripts : MonoBehaviour
 
 	void UpdateScore() 
 	{
-		lifeText.text = "LIVES = " + PlayerScript.lifeCount;
-		coinText.text = "COINS = " + PlayerScript.coinCount;
-		scoreText.text ="SCORE = " + PlayerScript.scoreCount;
+		lifeText.text = PlayerScript.lifeCount.ToString();
+		coinText.text = PlayerScript.coinCount.ToString();
+		scoreText.text = PlayerScript.scoreCount.ToString();
 	}
 
 }
