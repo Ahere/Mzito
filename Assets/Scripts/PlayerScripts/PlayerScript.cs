@@ -34,6 +34,8 @@ public class PlayerScript : MonoBehaviour {
 	private int mediumDifficulty;
 	private int hardDifficulty;
 
+//	public SpriteRenderer platColor;
+
     [SerializeField]
 	private GameObject endScoreBG;
 
@@ -73,7 +75,7 @@ public class PlayerScript : MonoBehaviour {
         fadeScript = fader.GetComponent<GamePlayFaderScript> (); // fader script reference
         fader.SetActive (false);
         isTheGameStartedFromBegining = true;
-
+        //platColor =    GameObject.FindGameObjectWithTag("Clouds").GetComponent<SpriteRenderer>(); // cloud sprite renderer refrence
 		cameraScript = GameObject.FindGameObjectWithTag ("MainCamera").GetComponent<CameraScript> (); // camera script reference
 
 		// check if the game was started from main manu to set initial values
@@ -391,6 +393,8 @@ void IsTheGameStartedFromMainMenu() {
 			
 			
 		}
+	
+       
 
     }
 

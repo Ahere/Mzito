@@ -28,11 +28,12 @@ public class PlayerGyroScope : MonoBehaviour {
        
        
         float speed = Input.acceleration.x * 0.15f;
+        Mathf.Clamp(speed ,-0.030f, 0.030f);
 
         if (speed > 0 &&  Time.timeScale == 1.0f)
         {
         
-        // Debug.Log("rightspeed"+ speed )
+         //Debug.Log("rightspeed"+ speed );
         Vector2 scale = transform.localScale;
 	    scale.x = animScale;
 		player.transform.localScale = scale;
@@ -49,7 +50,7 @@ public class PlayerGyroScope : MonoBehaviour {
         {
        
        
-        //Debug.Log("leftspeed"+ speed);
+       // Debug.Log("leftspeed"+ speed);
         Vector2 scale = transform.localScale;
 					scale.x = -animScale;
 		player.transform.localScale = scale;

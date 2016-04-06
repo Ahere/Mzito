@@ -19,6 +19,8 @@ public class CloudSpawnerScript : MonoBehaviour {
 	
 	private float lastCloudPositionY; 
 
+	//public CloudScript cloudScript;
+
     [SerializeField]
 	private GameObject [] collectables;
 
@@ -50,7 +52,7 @@ public class CloudSpawnerScript : MonoBehaviour {
          
          cloudsInGame = GameObject.FindGameObjectsWithTag("Clouds");
 
-         Vector3 temp = new Vector3(cloudsInGame[0].transform.position.x, cloudsInGame[0].transform.position.y + 0.6f , cloudsInGame[0].transform.position.z);
+         Vector3 temp = new Vector3(cloudsInGame[0].transform.position.x, cloudsInGame[0].transform.position.y + 0.5f , cloudsInGame[0].transform.position.z);
          
          playerScript.transform.position = temp;
    
@@ -172,6 +174,7 @@ public class CloudSpawnerScript : MonoBehaviour {
   	for (int i = 0; i< clouds.Length; i++)
   	{
   		clouds[i] = Instantiate(clouds[i] , Vector3.zero , Quaternion.identity) as GameObject;
+  		//clouds[i].AddComponent<CloudScript>();
 
         Vector3 temp = clouds[i].transform.position;
 
@@ -204,6 +207,7 @@ public class CloudSpawnerScript : MonoBehaviour {
 
 
    	}
+
 
 
 

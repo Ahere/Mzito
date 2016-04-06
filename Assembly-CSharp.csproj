@@ -59,6 +59,7 @@
      <Compile Include="Assets\Scripts\CameraScripts\CameraScript.cs" />
      <Compile Include="Assets\Scripts\CloudScript\BlackCloud.cs" />
      <Compile Include="Assets\Scripts\CloudScript\CloudCollectorScript.cs" />
+     <Compile Include="Assets\Scripts\CloudScript\CloudScript.cs" />
      <Compile Include="Assets\Scripts\CloudScript\CloudSpawnerScript.cs" />
      <Compile Include="Assets\Scripts\CloudScript\DealdyMovementScript.cs" />
      <Compile Include="Assets\Scripts\CloudScript\DoorScript.cs" />
