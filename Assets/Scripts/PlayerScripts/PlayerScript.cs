@@ -143,7 +143,7 @@ public class PlayerScript : MonoBehaviour {
 			if (transform.position.y < lastPosition.y)
 			{
 
-				scoreCount++;
+				//scoreCount++;
 			}
 		lastPosition = transform.position;
 
@@ -247,7 +247,7 @@ void PlayerWalkMobile() {
 
 			} // if Input.touchCount > 0
 
-	} // player walk mobile
+	} // player walk mobile new
 
 	void PlayerWalkKeyboard() 
 	{

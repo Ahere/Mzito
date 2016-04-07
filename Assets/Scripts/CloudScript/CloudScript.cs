@@ -21,7 +21,7 @@ public class CloudScript : MonoBehaviour
        temp = this.GetComponent<SpriteRenderer>();
        platColor = Color.white;
        temp.color = platColor;
-       PlayerScript.scoreCount += 500;
+       PlayerScript.scoreCount += 25;
 
       }
 
