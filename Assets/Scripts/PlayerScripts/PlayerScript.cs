@@ -526,7 +526,7 @@ void CheckGameStatus() {
 		endCoinText.text = coinCount.ToString ();
 				
 		// wait 3 seconds for the player to see the score
-		yield return new WaitForSeconds(3);
+		yield return new WaitForSeconds(5);
 		
 		// activate fader
 		fader.SetActive (true);

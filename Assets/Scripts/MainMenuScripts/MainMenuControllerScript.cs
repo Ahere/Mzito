@@ -12,6 +12,7 @@ public class MainMenuControllerScript : MonoBehaviour {
 
 	public AudioClip touchClip; // click clip
 	public AudioSource audioSource; // BGMusic audio source
+	public string level; // start level
 
 
 
@@ -55,7 +56,7 @@ public class MainMenuControllerScript : MonoBehaviour {
 //		}
 //			
 		PlayerPrefs.SetInt(GamePreferences.GameStartedFromMainMenu, 1);
-			SceneManager.LoadScene("Gameplay");
+			SceneManager.LoadScene("1_Mji_Ya_Ngoma");
 	}
 
 	public void HighscoreButton() 
