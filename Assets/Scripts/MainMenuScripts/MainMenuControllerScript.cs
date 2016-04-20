@@ -56,7 +56,8 @@ public class MainMenuControllerScript : MonoBehaviour {
 //		}
 //			
 		PlayerPrefs.SetInt(GamePreferences.GameStartedFromMainMenu, 1);
-			SceneManager.LoadScene("1_Mji_Ya_Ngoma");
+			SceneManager.LoadScene("LevelSelect");
+			//MadLevel.LoadLevelByName("LevelSelect");
 	}
 
 	public void HighscoreButton() 
@@ -64,14 +65,14 @@ public class MainMenuControllerScript : MonoBehaviour {
 
 
 		
-		
+		//MadLevel.LoadLevelByName("Highscore");
 		SceneManager.LoadScene("Highscore");
 	}
 
 	public void OptionsButton() {
 		
-	    
-		SceneManager.LoadScene("Options");
+	    SceneManager.LoadScene("Options");
+		//MadLevel.LoadLevelByName("Options");
 	}
 
 	public void QuitButton() {

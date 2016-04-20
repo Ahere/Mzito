@@ -88,7 +88,8 @@ public class PlayerScript : MonoBehaviour {
 	
 	}
 
-	void Update () {
+	void Update () 
+	{
 				
 			if (Time.timeScale == 1.0f) 
 			{
@@ -101,8 +102,12 @@ public class PlayerScript : MonoBehaviour {
 			//if(countTouches > 3) {
 				SetScore ();
 			//}
-
+		if (lifeCount > 2)  // max lives is now 2
+		{
+			lifeCount = 2;
 		}
+
+	}
 
 
 
@@ -423,6 +428,8 @@ void CheckGameStatus() {
 		lifeCount--;
 		
 		// if lifes are less than 0 end the game, get the coins and score and check it with the highscore
+		
+
 		if(lifeCount < 0) 
 		{
 			
