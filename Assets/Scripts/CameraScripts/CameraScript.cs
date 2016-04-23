@@ -14,11 +14,11 @@ public class CameraScript : MonoBehaviour {
 
 
     [SerializeField]
-	private float easySpeed = 2.4f;
+	private float easySpeed = 1.3f;
 	[SerializeField]
-	private float mediumSpeed = 3.0f;
+	private float mediumSpeed = 1.5f;
 	[SerializeField]
-	private float hardSpeed = 3.5f;
+	private float hardSpeed = 1.8f;
     [SerializeField]
 	public bool moveCamera;
 

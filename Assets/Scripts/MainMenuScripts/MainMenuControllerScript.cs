@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using MadLevelManager;
 
 public class MainMenuControllerScript : MonoBehaviour {
 
@@ -56,7 +57,7 @@ public class MainMenuControllerScript : MonoBehaviour {
 //		}
 //			
 		PlayerPrefs.SetInt(GamePreferences.GameStartedFromMainMenu, 1);
-			SceneManager.LoadScene("LevelSelect");
+			MadLevel.LoadLevelByName("LevelSelect");
 			//MadLevel.LoadLevelByName("LevelSelect");
 	}
 
@@ -66,12 +67,12 @@ public class MainMenuControllerScript : MonoBehaviour {
 
 		
 		//MadLevel.LoadLevelByName("Highscore");
-		SceneManager.LoadScene("Highscore");
+		MadLevel.LoadLevelByName("HighScore");
 	}
 
 	public void OptionsButton() {
 		
-	    SceneManager.LoadScene("Options");
+	    MadLevel.LoadLevelByName("Options");
 		//MadLevel.LoadLevelByName("Options");
 	}
 

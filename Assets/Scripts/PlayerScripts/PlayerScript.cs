@@ -2,9 +2,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Collections;
+using MadLevelManager;
 
 public class PlayerScript : MonoBehaviour {
 
+    public bool completeLevel;
 	public float speed = 8.0f;	// the speed by which the player moves
 	public float maxVelocity = 3.0f;	// maximum velocity of the player
    
@@ -59,6 +61,7 @@ public class PlayerScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
+		completeLevel = false; // initialize the level as looked.
 		Time.timeScale = 0.0f;
 		endScoreBG.SetActive (false);
 		animator = GetComponent<Animator> ();	// getting the animator reference
@@ -101,11 +104,25 @@ public class PlayerScript : MonoBehaviour {
 	
 			//if(countTouches > 3) {
 				SetScore ();
+				CheckLevelCompleted();
 			//}
 		if (lifeCount > 2)  // max lives is now 2
+		
 		{
 			lifeCount = 2;
 		}
+
+
+		if (Input.GetMouseButtonDown (0) || Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began) 
+
+
+		{
+				
+				
+				Time.timeScale = 1.0f;	
+				
+		}
+
 
 	}
 
@@ -117,7 +134,7 @@ public class PlayerScript : MonoBehaviour {
 		if (isTheGameStartedFromBegining) 
 		{
 			
-			if (Input.GetMouseButtonDown (0)) 
+			if (Input.GetMouseButtonDown (0) || Input.touchCount > 0 ) 
 			{
 				
 			//	if(adScript.bannerView != null) {
@@ -126,7 +143,7 @@ public class PlayerScript : MonoBehaviour {
 			//		adScript.bannerView = null;
 			//	}
 				
-				Time.timeScale = 1.0f;	
+				
 				
 				countPoints = true; // score points is true initialy
 				isTheGameStartedFromBegining = false;
@@ -176,6 +193,25 @@ public class PlayerScript : MonoBehaviour {
 			temp.x = -boundaries.x;
 			transform.position = temp;
 		}
+
+	}
+
+	void CheckLevelCompleted()     // check if the level is completed.
+	{
+		if (scoreCount > 2000)  // check if the score is enough to mark the level completed.
+		{
+			completeLevel = true;
+
+            if (completeLevel) 
+	
+            {
+
+            MadLevelProfile.SetCompleted(MadLevel.currentLevelName, true);
+
+
+           }
+
+        }
 
 	}
 
@@ -427,9 +463,11 @@ void CheckGameStatus() {
 		transform.position = temp;
 		lifeCount--;
 		
-		// if lifes are less than 0 end the game, get the coins and score and check it with the highscore
+		
 		
 
+
+        // if lifes are less than 0 end the game, get the coins and score and check it with the highscore
 		if(lifeCount < 0) 
 		{
 			
@@ -518,7 +556,7 @@ void CheckGameStatus() {
 		float fadeTime = fadeScript.BeginFade (1);
 		
 		yield return new WaitForSeconds(fadeTime);
-		SceneManager.LoadScene(reloadLevel);
+		MadLevel.LoadLevelByName(reloadLevel);
 	}
 	
 	// reload main menu after player has no more lifes left
@@ -545,7 +583,7 @@ void CheckGameStatus() {
 		float fadeTime = fadeScript.BeginFade (1);
 		yield return new WaitForSeconds(fadeTime);
 		
-	SceneManager.LoadScene("MainMenu");
+	MadLevel.LoadLevelByName("MainMenu");
 
 }
 

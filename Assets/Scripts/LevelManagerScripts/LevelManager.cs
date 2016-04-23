@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using MadLevelManager;
 
-public class LevelManager : MonoBehaviour 
-
+public class LevelManager : MonoBehaviour
 {
     public string reloadLevel;
 	// Use this for initialization
@@ -12,39 +12,48 @@ public class LevelManager : MonoBehaviour
 	public void Level1()
 	{
      
-      SceneManager.LoadScene("1_Mji_Ya_Ngoma");
+      MadLevel.LoadLevelByName("1_Mji_Ya_Ngoma");
 
 	}
 	public void Level2()
 	{
-      SceneManager.LoadScene("2_Flamingo");
+      MadLevel.LoadLevelByName("2_Flamingo");
 	}
     public void Level3()
 	{
      
-      SceneManager.LoadScene("3_Buffalo_Miggration");
+      MadLevel.LoadLevelByName("3_Buffalo_Miggration");
 
 	}
 	public void Level4()
 	{
      
-      SceneManager.LoadScene("4_Mountain_Gorrilas");
+      MadLevel.LoadLevelByName("4_Mountain_Gorrilas");
 
 	}
 	public void Level5()
 	{
      
-      SceneManager.LoadScene("5_Pyramids");
+      MadLevel.LoadLevelByName("5_Pyramids");
 
 	}
 	public void Level6()
 	{
      
-      SceneManager.LoadScene("6_Zambezi");
+      MadLevel.LoadLevelByName("6_Zambezi");
 
 	}
 	public void ReloadLevel()
 	{
-		SceneManager.LoadScene(reloadLevel);
+		MadLevel.LoadLevelByName(reloadLevel);
+
 	}
+
+	public void LevelSelect()
+{
+
+	 MadLevel.LoadLevelByName("LevelSelect");
+}
+
+
 }

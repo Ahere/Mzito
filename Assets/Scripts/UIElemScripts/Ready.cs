@@ -5,7 +5,7 @@ public class Ready : MonoBehaviour {
 
 	// Use this for initialization
 	void OnEnable () {
-		Invoke ("DestroyCollectable", 3.5f);
+		Invoke ("DestroyCollectable", 2.0f);
 	}
 
 	void DestroyCollectable() {
