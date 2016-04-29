@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scene/LevelSelect.unity
+- path: Assets/Scene/1_Mji_Ya_Ngoma.unity
   isLoaded: 1
   isActive: 1

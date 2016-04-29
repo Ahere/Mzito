@@ -9,7 +9,7 @@ public class CameraScript : MonoBehaviour {
 	[SerializeField]
 	private float acceleration = 0.2f;
 
-	private float maxSpeed = 3.0f;
+	private float maxSpeed = 2.0f;
 	private float smooth = 0.1f;
 
 

@@ -133,6 +133,9 @@
      <None Include="Assets\Mad Level Manager\Examples\Stuff\Fonts\Boogaloo New\boogaloo.txt" />
      <None Include="Assets\Mad Level Manager\Themes\Theme1\Fonts\font.txt" />
      <None Include="Assets\Mad Level Manager\Scripts\Mad2D\Resources\Shaders\Font White DB.shader" />
+ <Reference Include="Assembly-UnityScript">
+ <HintPath>D:/Documents/GitHub/Mzito/Library/ScriptAssemblies/Assembly-UnityScript.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEngine.Networking">
  <HintPath>E:/Unity5.3/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
  </Reference>

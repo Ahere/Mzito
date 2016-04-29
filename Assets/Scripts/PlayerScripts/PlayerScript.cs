@@ -5,16 +5,27 @@ using System.Collections;
 using MadLevelManager;
 
 public class PlayerScript : MonoBehaviour {
-
+	public Text text1;
+	public Text text2;
+    public Vector3 fingerPos;
+    public GameObject[] listener1;     // listerner to help count them.
+    public GameObject[] listener2;     // listerner to help count them.
     public bool completeLevel;
 	public float speed = 8.0f;	// the speed by which the player moves
 	public float maxVelocity = 3.0f;	// maximum velocity of the player
+	public bool grounded;
+	
    
 	private Animator animator;	    // players animator for animation controlce to the camera script
+	public Animator BoostCharge;
+	public Material boostMat;
+	public Material NormalMat; 
+	public Material boostGuiMat;
 
     public string reloadLevel;
 	public AudioClip lifeSound;     // Sounds
 	public AudioClip coinSound;
+
 
 
 	public Vector3 boundaries;      // player boundaries
@@ -22,6 +33,8 @@ public class PlayerScript : MonoBehaviour {
 	public static int lifeCount;	// life counter
 	public static int coinCount;	// coin counter
 	public static int scoreCount;	// score counter
+	public static int musicBoostCount;  // Boost count.
+	private int  mBoostChecker;
 	[SerializeField]
 	private float animScale = 1.0f ;	// scale for animator
 
@@ -32,9 +45,12 @@ public class PlayerScript : MonoBehaviour {
 
     private CameraScript cameraScript;
 
+    public CloudSpawnerScript platformScript;
+
     private int easyDifficulty;		
 	private int mediumDifficulty;
 	private int hardDifficulty;
+	public GameObject TutorialText;
 
 //	public SpriteRenderer platColor;
 
@@ -59,8 +75,16 @@ public class PlayerScript : MonoBehaviour {
 
     public GameObject DoorUI;
 
+    public   int a = 0;
+    public   int b = 0;
+    
+
 	// Use this for initialization
-	void Awake () {
+	void Awake () 
+
+	{
+        grounded = true;
+		
 		completeLevel = false; // initialize the level as looked.
 		Time.timeScale = 0.0f;
 		endScoreBG.SetActive (false);
@@ -69,7 +93,7 @@ public class PlayerScript : MonoBehaviour {
 		 scoreCount = 0;
 		 lastPosition = transform.position;    // sets last position as start position.
 
-		 boundaries = Camera.main.ScreenToWorldPoint(new Vector3 (Screen.width, 0, 0)); // getting player boundaries
+		 boundaries = Camera.main.ScreenToWorldPoint(new Vector3 (Screen.width , 0, 0)); // getting player boundaries
 
 		easyDifficulty = GamePreferences.GetEasyDifficultyState ();
 		mediumDifficulty = GamePreferences.GetMediumDifficultyState ();
@@ -80,6 +104,8 @@ public class PlayerScript : MonoBehaviour {
         isTheGameStartedFromBegining = true;
         //platColor =    GameObject.FindGameObjectWithTag("Clouds").GetComponent<SpriteRenderer>(); // cloud sprite renderer refrence
 		cameraScript = GameObject.FindGameObjectWithTag ("MainCamera").GetComponent<CameraScript> (); // camera script reference
+        platformScript = GameObject.FindGameObjectWithTag("Spawner").GetComponent<CloudSpawnerScript>(); // cloud spawner script refrence.
+
 
 		// check if the game was started from main manu to set initial values
 		IsTheGameStartedFromMainMenu ();
@@ -87,9 +113,17 @@ public class PlayerScript : MonoBehaviour {
 		// check if the game was resumed after player died to continue the game
 		IsTheGameResumedAfterPlayerDied ();
 		DoorUI.SetActive(false);
-    
+
+
+
+		
+
 	
 	}
+	
+	
+		
+
 
 	void Update () 
 	{
@@ -119,17 +153,33 @@ public class PlayerScript : MonoBehaviour {
 		{
 				
 				
-				Time.timeScale = 1.0f;	
+				Time.timeScale = 1.0f;
+		  
+				 MusicBoost();
+
 				
 		}
 
+		MusicBoost();
 
+
+      CheckMusicBoostCount();
+
+
+      text1.text = (mBoostChecker.ToString());
+      text2.text = (musicBoostCount.ToString());
+
+      CheckboostGui();
+      
+
+    
 	}
 
 
 
 	void LateUpdate()
 	 {
+	 	
 
 		if (isTheGameStartedFromBegining) 
 		{
@@ -176,6 +226,51 @@ public class PlayerScript : MonoBehaviour {
 	}
 
 
+
+	public void checkPlatforms() // check if the bluue platforms are linked to the checker
+	{ 
+
+
+    for(int i = 0; i <= 5 ; i++ )
+	{
+
+
+		if (platformScript.cloudsInGame[i].name == null )
+		      {
+
+
+		      	Debug.Log("Nothing here");
+
+
+		      }
+
+
+
+	   else
+		      {
+				  if(platformScript.cloudsInGame[i].name == "plat1")
+
+				  {
+				   
+				    listener1[a] = platformScript.cloudsInGame[i];
+				    a++;
+				    Debug.Log(a + " a value");
+				  }
+
+				  if(platformScript.cloudsInGame[i].name == "plat2")
+				  {
+				    
+				    listener2[b] = platformScript.cloudsInGame[i];
+				    b++;
+				    Debug.Log(b + " b value");
+				  }
+			  }
+
+	    }      
+
+	 }
+
+
 	void CheckBounds() {
 
 		// check if the players x is greather than the x of the boundaries, if its true set the players x to be boundaries x
@@ -196,7 +291,7 @@ public class PlayerScript : MonoBehaviour {
 
 	}
 
-	void CheckLevelCompleted()     // check if the level is completed.
+	public void CheckLevelCompleted()     // check if the level is completed.
 	{
 		if (scoreCount > 2000)  // check if the score is enough to mark the level completed.
 		{
@@ -247,7 +342,7 @@ void PlayerWalkMobile() {
 					
 					// if the velocity of the player is less than the maxVelocity
 					if(velocity < maxVelocity){
-						force = speed;
+						//force = speed;
 					}
 					
 					// turn the player to face right
@@ -267,7 +362,7 @@ void PlayerWalkMobile() {
 					// if the velocity of the player is less than the maxVelocity
 					if(velocity < maxVelocity)
 					{
-						force = -speed;
+						//force = -speed;
 					}
 					
 					// turn the player to face right
@@ -394,65 +489,148 @@ void IsTheGameStartedFromMainMenu() {
 	{
 
 	 if (target.tag == "Coins") 
-	   {
+	   {    
+
 			coinCount++;
 			scoreCount += 200;
 			AudioSource.PlayClipAtPoint(coinSound, target.transform.position);
 			target.gameObject.SetActive (false);
+			
 		}
        
      if (target.tag == "Life") 
-       {
+       {    
+       	    
 			lifeCount++;
 			scoreCount += 300;
 			AudioSource.PlayClipAtPoint(lifeSound, target.transform.position);
 			target.gameObject.SetActive (false);
 			
+			
 		}
 		
 	if (target.tag == "Boundary") 
-		{
+		{   
+			
 			cameraScript.moveCamera = false;
 			countPoints = false;
 			CheckGameStatus();
+			
+		    
 		}
 		
 	if (target.tag == "Deadly") 
-		{
+		{   
+			
 			cameraScript.moveCamera = false;
 			countPoints = false;
-			CheckGameStatus();	
+			CheckGameStatus();
+				
 		}
 		
 
-		if (target.tag =="Door") 
-		{
+		
+
+
+     for(int i = 0; i < listener1.Length; i++)
+     {
+        
+		if (target.gameObject == listener1[i] )
+		  { 
+		  	
+            musicBoostCount++;
+		  	Debug.Log ("IT HAPPEND");
+           
+            
+			
+		 } 
+
+	}   
+
+
+	for(int i = 0; i < listener2.Length; i++)
+     {
+        
+		if (target.gameObject == listener2[i])
+		  { 
+		  	
+            musicBoostCount++;
+		  	Debug.Log ("IT HAPPEND2");
+            
+		    	
+		 } 
+
+	}
+
+
+	if (target.tag == "Clouds")
+  	{
+     
+  	 grounded = true;
+    
+
+  	}     
+
+  }
+
+
+  void OnTriggerStay2D (Collider2D target)
+  {
+
+  	
+
+  	if (target.tag =="Door") 
+
+    {
 			
 			cameraScript.moveCamera = false;
 		    DoorUI.SetActive (true);
+		    
 			 // Door open and stop the camera.
-			
-			
-		}
-	
-       
+	}
+  	
 
-    }
+
+
+  }
 
 	 void OnTriggerExit2D(Collider2D target) 
     {
 
-		if (target.tag =="Door") 
-		{
-			
-		    DoorUI.SetActive (false);
-		    cameraScript.moveCamera = true;
-		    // Set door UI to false and continue camera
-			 
-			
-			
+
+	    if (target.tag == "Clouds")
+	    {
+	    	grounded =  false;
+	    	
 	    }
 	}
+
+void CheckMusicBoostCount ()
+{
+
+	if (musicBoostCount > 1)
+	{
+
+		musicBoostCount = 1;
+	}
+	if (mBoostChecker == -1)
+	{
+
+		mBoostChecker = 0;
+	}
+	if (mBoostChecker == 0)
+	{
+		GetComponent<Renderer>().material = NormalMat;
+	}
+	if (mBoostChecker > 4)
+	{
+		mBoostChecker = 4;
+	}
+
+
+
+
+}
 
 void CheckGameStatus() {
 		
@@ -542,9 +720,113 @@ void CheckGameStatus() {
 			
 			
 		}
+
+
 		
 	}
-	IEnumerator ReloadGame() {
+
+
+
+	 void MusicBoost() 
+	 {  
+	     // checks if the music boostcount has reached 2 if it has it will ADD 1 to the checker and allow you to usic bost.
+	 	if(musicBoostCount == 1)
+	 	{
+	 		               
+	 		mBoostChecker++;
+	 		musicBoostCount = 0;
+	 		GetComponent<Renderer>().material = boostMat; 
+	 	}
+
+       if (Input.touchCount > 0 && mBoostChecker > 0 && grounded == false) 
+         {
+                // The screen has been touched so store the touch
+                Touch touchMe = Input.GetTouch(0);
+               
+         
+         if (touchMe.phase == TouchPhase.Began || touchMe.phase == TouchPhase.Moved || touchMe.phase == TouchPhase.Stationary) 
+             {
+                 // If the finger is on the screen, move the object smoothly to the touch position
+                 Vector3 touchPosition = Camera.main.ScreenToWorldPoint(new Vector3(touchMe.position.x, touchMe.position.y, 10));
+
+                 transform.position = Vector2.Lerp(transform.position, touchPosition, Time.deltaTime * 16 );
+                 
+                 Debug.Log(touchPosition);
+                 mBoostChecker -= 1;
+             }
+         }
+
+         
+
+
+     }
+
+  //  void SetAlpha (Material material, float value) // Fader to change alpha of a image
+
+  //  {
+
+  //   Color color = material.color;
+  //   color.a = value;
+   //  material.color = color;
+
+   // }
+
+     void CheckboostGui()
+     {
+
+     	if (mBoostChecker > 0)
+     	{
+     		TutorialText.SetActive(true);
+     	}
+
+     	if (mBoostChecker == 0)
+     	{
+
+         animator.SetInteger("dash", 1);
+         TutorialText.SetActive(false);
+
+     	}
+     
+
+       
+       
+       if(mBoostChecker == 1)
+       {
+       	 animator.SetInteger("dash", 2);
+       }
+
+
+        if(mBoostChecker == 2)
+       {
+       	 animator.SetInteger("dash", 3);
+       }
+
+
+        if(mBoostChecker == 3)
+       {
+       	
+         animator.SetInteger("dash", 4);
+       }
+
+
+
+        if(mBoostChecker == 4)
+       {
+       	animator.SetInteger("dash", 5);
+
+       }
+
+
+     }
+
+    IEnumerator Physics() 
+    {
+        yield return new WaitForFixedUpdate();
+    }
+
+	 
+	IEnumerator ReloadGame() 
+	{
 		
 		// set the fader to be active because we need it now
 		fader.SetActive (true);

@@ -1,21 +1,19 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
-public class CloudSpawnerScript : MonoBehaviour {
+public  class CloudSpawnerScript : MonoBehaviour {
 
     [SerializeField]
 
     private GameObject[] clouds; // or clouds
 
-    [SerializeField]
-
-    private GameObject[] cloudsInGame;	
+    public  GameObject[] cloudsInGame;	
 	
 	public float distanceBetweenClouds = 1; // distancate between y position of the cluds
 	
 	public static  float minX, maxX; // min and max x for clouds
 
-	private PlayerScript playerScript;  // player script
+	public PlayerScript playerScript;  // player script
 	
 	private float lastCloudPositionY; 
 
@@ -53,8 +51,10 @@ public class CloudSpawnerScript : MonoBehaviour {
          cloudsInGame = GameObject.FindGameObjectsWithTag("Clouds");
 
          Vector3 temp = new Vector3(cloudsInGame[0].transform.position.x, cloudsInGame[0].transform.position.y + 0.5f , cloudsInGame[0].transform.position.z);
-         
+      
          playerScript.transform.position = temp;
+
+               // Check if the plartform are blue 
    
     }
 
@@ -159,8 +159,8 @@ public class CloudSpawnerScript : MonoBehaviour {
 
   void Update()
    {
-
-
+     playerScript.checkPlatforms();
+   
 
    }
    
@@ -175,6 +175,15 @@ public class CloudSpawnerScript : MonoBehaviour {
   	{
   		clouds[i] = Instantiate(clouds[i] , Vector3.zero , Quaternion.identity) as GameObject;
   		//clouds[i].AddComponent<CloudScript>();
+  		if (clouds[i].name == "Cloud1(Clone)")
+  		{
+  		clouds[i].name = "plat1";
+        }
+
+        if(clouds[i].name == "Cloud2(Clone)" )
+        {
+        	clouds[i].name = "plat2";
+        }
 
         Vector3 temp = clouds[i].transform.position;
 
@@ -186,7 +195,12 @@ public class CloudSpawnerScript : MonoBehaviour {
         clouds[i].transform.position = temp;
 
         positionY -= distanceBetweenClouds;
+
+
   	}
+
+   
+
 
   }
 

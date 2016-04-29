@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class CloudCollectorScript : MonoBehaviour {
@@ -7,10 +7,12 @@ public class CloudCollectorScript : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D target)
 
 	{
-        if((target.tag =="Clouds") || (target.tag == "Deadly")) 
+        if((target.tag =="Clouds") || (target.tag == "Deadly" || target.tag == "Listener")) 
         {
         	target.gameObject.SetActive(false);
         }
+
+        
 
 	}
 	

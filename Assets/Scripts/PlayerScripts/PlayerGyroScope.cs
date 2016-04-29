@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 // Activate head tracking using the gyroscope
@@ -25,6 +25,8 @@ public class PlayerGyroScope : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     { 
+
+     
        
        
         float speed = Input.acceleration.x * 0.15f;

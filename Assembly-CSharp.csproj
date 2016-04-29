@@ -154,6 +154,7 @@
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerButtonMov.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerGyroScope.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerScript.cs" />
+     <Compile Include="Assets\Scripts\PlayerScripts\TapToMove.cs" />
      <Compile Include="Assets\Scripts\UIElemScripts\Ready.cs" />
      <Compile Include="Assets\Scripts\UIElemScripts\UIElementsScripts.cs" />
      <Compile Include="Assets\Scripts\UIElemScripts\UIPauseScript.cs" />
