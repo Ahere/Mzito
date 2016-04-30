@@ -487,6 +487,16 @@ void IsTheGameStartedFromMainMenu() {
 
 	void OnTriggerEnter2D(Collider2D target)
 	{
+		if (target.tag =="Door") 
+
+    {
+			
+			cameraScript.moveCamera = false;
+		    DoorUI.SetActive (true);
+		    
+			 // Door open and stop the camera.
+	}
+  	
 
 	 if (target.tag == "Coins") 
 	   {    
@@ -579,15 +589,6 @@ void IsTheGameStartedFromMainMenu() {
 
   	
 
-  	if (target.tag =="Door") 
-
-    {
-			
-			cameraScript.moveCamera = false;
-		    DoorUI.SetActive (true);
-		    
-			 // Door open and stop the camera.
-	}
   	
 
 
@@ -603,6 +604,17 @@ void IsTheGameStartedFromMainMenu() {
 	    	grounded =  false;
 	    	
 	    }
+
+	    if (target.tag =="Door") 
+
+        {
+			
+			cameraScript.moveCamera = true;
+		    DoorUI.SetActive (false);
+		    
+			 // Door open and stop the camera.
+	    }
+  	
 	}
 
 void CheckMusicBoostCount ()
@@ -730,7 +742,7 @@ void CheckGameStatus() {
 	 void MusicBoost() 
 	 {  
 	     // checks if the music boostcount has reached 2 if it has it will ADD 1 to the checker and allow you to usic bost.
-	 	if(musicBoostCount == 1)
+	 	if(musicBoostCount >= 1)
 	 	{
 	 		               
 	 		mBoostChecker++;
@@ -744,15 +756,19 @@ void CheckGameStatus() {
                 Touch touchMe = Input.GetTouch(0);
                
          
-         if (touchMe.phase == TouchPhase.Began || touchMe.phase == TouchPhase.Moved || touchMe.phase == TouchPhase.Stationary) 
+         if (touchMe.phase == TouchPhase.Began) 
              {
                  // If the finger is on the screen, move the object smoothly to the touch position
+             	 Time.timeScale = 0.5f;
                  Vector3 touchPosition = Camera.main.ScreenToWorldPoint(new Vector3(touchMe.position.x, touchMe.position.y, 10));
 
                  transform.position = Vector2.Lerp(transform.position, touchPosition, Time.deltaTime * 16 );
                  
                  Debug.Log(touchPosition);
-                 mBoostChecker -= 1;
+                 mBoostChecker = mBoostChecker - 1;
+                 Time.timeScale = 1.0f;
+                 
+
              }
          }
 
@@ -779,10 +795,10 @@ void CheckGameStatus() {
      		TutorialText.SetActive(true);
      	}
 
-     	if (mBoostChecker == 0)
+     	if (mBoostChecker == 0  )
      	{
 
-         animator.SetInteger("dash", 1);
+         BoostCharge.SetInteger("dash", 1);
          TutorialText.SetActive(false);
 
      	}
@@ -790,29 +806,29 @@ void CheckGameStatus() {
 
        
        
-       if(mBoostChecker == 1)
+       if(mBoostChecker == 1  )
        {
-       	 animator.SetInteger("dash", 2);
+       	 BoostCharge.SetInteger("dash", 2);
        }
 
 
-        if(mBoostChecker == 2)
+        if(mBoostChecker == 2  )
        {
-       	 animator.SetInteger("dash", 3);
+       	 BoostCharge.SetInteger("dash", 3);
        }
 
 
-        if(mBoostChecker == 3)
+        if(mBoostChecker == 3  )
        {
        	
-         animator.SetInteger("dash", 4);
+         BoostCharge.SetInteger("dash", 4);
        }
 
 
 
-        if(mBoostChecker == 4)
+        if(mBoostChecker == 4  )
        {
-       	animator.SetInteger("dash", 5);
+       	 BoostCharge.SetInteger("dash", 5);
 
        }
 
@@ -868,6 +884,15 @@ void CheckGameStatus() {
 	MadLevel.LoadLevelByName("MainMenu");
 
 }
+
+  public static bool HasParameter(string paramName, Animator animator)
+  {
+     foreach (AnimatorControllerParameter param in animator.parameters)
+     {
+        if (param.name == paramName) return true;
+     }
+     return false;
+  }
 
 
 }
