@@ -38,10 +38,10 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="UnityEngine">
-      <HintPath>E:/Unity5.3/Editor/Data/Managed/UnityEngine.dll</HintPath>
+      <HintPath>E:/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor">
-      <HintPath>E:/Unity5.3/Editor/Data/Managed/UnityEditor.dll</HintPath>
+      <HintPath>E:/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -136,7 +136,9 @@
      <Compile Include="Assets\Scripts\BGScripts\BGSpawner.cs" />
      <Compile Include="Assets\Scripts\BGScripts\BGSpawner2.cs" />
      <Compile Include="Assets\Scripts\CameraScripts\CameraScript.cs" />
+     <Compile Include="Assets\Scripts\CameraScripts\TutorialCameraScript.cs" />
      <Compile Include="Assets\Scripts\CloudScript\BlackCloud.cs" />
+     <Compile Include="Assets\Scripts\CloudScript\CloudAnimationScript.cs" />
      <Compile Include="Assets\Scripts\CloudScript\CloudCollectorScript.cs" />
      <Compile Include="Assets\Scripts\CloudScript\CloudScript.cs" />
      <Compile Include="Assets\Scripts\CloudScript\CloudSpawnerScript.cs" />
@@ -148,14 +150,25 @@
      <Compile Include="Assets\Scripts\FaderScripts\MainMenuFaderScript.cs" />
      <Compile Include="Assets\Scripts\GamePrefrences\GamePrefrencesScript.cs" />
      <Compile Include="Assets\Scripts\HighScoreScripts\HighScoreScript.cs" />
+     <Compile Include="Assets\Scripts\LevelManagerScripts\DashTutorialScript.cs" />
      <Compile Include="Assets\Scripts\LevelManagerScripts\LevelManager.cs" />
+     <Compile Include="Assets\Scripts\LevelManagerScripts\MovmentTutorialScript.cs" />
      <Compile Include="Assets\Scripts\MainMenuScripts\MainMenuControllerScript.cs" />
      <Compile Include="Assets\Scripts\OptionsScripts\OptionsMenuScripts.cs" />
+     <Compile Include="Assets\Scripts\PlayerScripts\NewBehaviourScript.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerButtonMov.cs" />
+     <Compile Include="Assets\Scripts\PlayerScripts\PlayerEffectsScript.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerGyroScope.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerScript.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\TapToMove.cs" />
+     <Compile Include="Assets\Scripts\PlayerScripts\TutorialPlayerScript.cs" />
+     <Compile Include="Assets\Scripts\Primitives\DiamondGraph.cs" />
+     <Compile Include="Assets\Scripts\Primitives\UICircle.cs" />
+     <Compile Include="Assets\Scripts\Primitives\UICornerCut.cs" />
+     <Compile Include="Assets\Scripts\Primitives\UILineRenderer.cs" />
+     <Compile Include="Assets\Scripts\Primitives\UILineTextureRenderer.cs" />
      <Compile Include="Assets\Scripts\UIElemScripts\Ready.cs" />
+     <Compile Include="Assets\Scripts\UIElemScripts\TutorialUIElementsScripts.cs" />
      <Compile Include="Assets\Scripts\UIElemScripts\UIElementsScripts.cs" />
      <Compile Include="Assets\Scripts\UIElemScripts\UIPauseScript.cs" />
      <Compile Include="Assets\unity-ui-extensions\Scripts\Accordion\Accordion.cs" />
@@ -197,11 +210,6 @@
      <Compile Include="Assets\unity-ui-extensions\Scripts\Layout\ScrollSnap.cs" />
      <Compile Include="Assets\unity-ui-extensions\Scripts\Layout\TileSizeFitter.cs" />
      <Compile Include="Assets\unity-ui-extensions\Scripts\Layout\VerticalScrollSnap.cs" />
-     <Compile Include="Assets\unity-ui-extensions\Scripts\Primitives\DiamondGraph.cs" />
-     <Compile Include="Assets\unity-ui-extensions\Scripts\Primitives\UICircle.cs" />
-     <Compile Include="Assets\unity-ui-extensions\Scripts\Primitives\UICornerCut.cs" />
-     <Compile Include="Assets\unity-ui-extensions\Scripts\Primitives\UILineRenderer.cs" />
-     <Compile Include="Assets\unity-ui-extensions\Scripts\Primitives\UILineTextureRenderer.cs" />
      <Compile Include="Assets\unity-ui-extensions\Scripts\RaycastMask.cs" />
      <Compile Include="Assets\unity-ui-extensions\Scripts\ReorderableList\ReorderableList.cs" />
      <Compile Include="Assets\unity-ui-extensions\Scripts\ReorderableList\ReorderableListContent.cs" />
@@ -247,17 +255,12 @@
      <None Include="Assets\Mad Level Manager\Examples\Stuff\Fonts\Boogaloo New\boogaloo.txt" />
      <None Include="Assets\Mad Level Manager\Themes\Theme1\Fonts\font.txt" />
      <None Include="Assets\Mad Level Manager\Scripts\Mad2D\Resources\Shaders\Font White DB.shader" />
+     <None Include="Assets\OnScreenControlls\license.txt" />
  <Reference Include="UnityEngine.UI">
- <HintPath>E:/Unity5.3/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ <HintPath>E:/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
- <HintPath>E:/Unity5.3/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
- </Reference>
- <Reference Include="Mono.Cecil">
- <HintPath>E:/Unity5.3/Editor/Data/Managed/Mono.Cecil.dll</HintPath>
- </Reference>
- <Reference Include="UnityEditor.iOS.Extensions.Xcode">
- <HintPath>E:/Unity5.3/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
+ <HintPath>E:/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

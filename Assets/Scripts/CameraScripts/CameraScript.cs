@@ -112,8 +112,8 @@ public class CameraScript : MonoBehaviour {
 		
 		GetComponent<Camera>().orthographicSize = height / pixelToUnits / 2;
 
-		if (GetComponent<Camera>().orthographicSize < 3.99)
-						GetComponent<Camera>().orthographicSize = 3.99f;
+		if (GetComponent<Camera>().orthographicSize < 3.70)
+						GetComponent<Camera>().orthographicSize = 3.70f;
 
 	}
 

@@ -50,10 +50,22 @@ public class LevelManager : MonoBehaviour
 	}
 
 	public void LevelSelect()
-{
+    {
 
 	 MadLevel.LoadLevelByName("LevelSelect");
-}
+    }
+    public void Tutorial1()
+	{
+     
+      MadLevel.LoadLevelByName("0_TutorialStage");
+
+	}
+	public void Tutorial2()
+	{
+     
+      MadLevel.LoadLevelByName("0_TutorialStage2");
+
+	}
 
 
 }

@@ -17,6 +17,8 @@ public class PlayerScript : MonoBehaviour {
 	
    
 	private Animator animator;	    // players animator for animation controlce to the camera script
+    public Animator effects;
+    public Animator effects2;
 	public Animator BoostCharge;
 	public Material boostMat;
 	public Material NormalMat; 
@@ -36,7 +38,7 @@ public class PlayerScript : MonoBehaviour {
 	public static int musicBoostCount;  // Boost count.
 	private int  mBoostChecker;
 	[SerializeField]
-	private float animScale = 1.0f ;	// scale for animator
+	private float animScale = 2.0f ;	// scale for animator
 
 	public bool countPoints;	// boolean value to control the point count, initialy it is set to true but when the player dies it will be
 	// set to false to prevent score count while the player is dead
@@ -83,6 +85,9 @@ public class PlayerScript : MonoBehaviour {
 	void Awake () 
 
 	{
+		musicBoostCount = 0;
+		mBoostChecker = 0;
+	 		
         grounded = true;
 		
 		completeLevel = false; // initialize the level as looked.
@@ -128,18 +133,20 @@ public class PlayerScript : MonoBehaviour {
 	void Update () 
 	{
 				
-			if (Time.timeScale == 1.0f) 
-			{
+		if (Time.timeScale == 1.0f) 
+		{
 			
 			PlayerWalkKeyboard ();
+
+		    Gyrowalk ();
 			
-			PlayerWalkMobile ();
-			}
+		}
 	
-			//if(countTouches > 3) {
-				SetScore ();
-				CheckLevelCompleted();
-			//}
+		
+		SetScore ();
+		CheckLevelCompleted();
+
+			
 		if (lifeCount > 2)  // max lives is now 2
 		
 		{
@@ -150,26 +157,22 @@ public class PlayerScript : MonoBehaviour {
 		if (Input.GetMouseButtonDown (0) || Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began) 
 
 
-		{
-				
+		{		
 				
 				Time.timeScale = 1.0f;
-		  
-				 MusicBoost();
-
-				
-		}
-
-		MusicBoost();
-
-
+		       		
+		} 
       CheckMusicBoostCount();
+      CheckboostGui();
+	  MusicBoost();
+      
+     
 
 
       text1.text = (mBoostChecker.ToString());
       text2.text = (musicBoostCount.ToString());
 
-      CheckboostGui();
+      
       
 
     
@@ -309,81 +312,47 @@ public class PlayerScript : MonoBehaviour {
         }
 
 	}
+     
+     void Gyrowalk ()
+{
+        float speed = Input.acceleration.x * 0.2f;
+        Mathf.Clamp(speed ,-0.030f, 0.030f);
+
+        if (speed > 0 &&  Time.timeScale == 1.0f)
+        {
+        
+         //Debug.Log("rightspeed"+ speed );
+        Vector2 scale = transform.localScale;
+        scale.x = animScale;
+        gameObject.transform.localScale = scale;
+          
+    // animate the walk
+         animator.SetFloat( "WalkG", 1.0f );
+          
 
 
-
-//	void LateUpdate (){
-
-		//Time.timeScale = 1.0f;	
-//	}
-	
-	// Update is called once per frame
-	
-
-void PlayerWalkMobile() {
-
-		// force by which we will push the player
-		float force = 0.0f;
-		// the players velocity
-		//float velocity = Mathf.Abs (GetComponent<Rigidbody2D>().velocity.x);
-
-		if (Input.touchCount > 0) {
-
-				
-
-				Touch h = Input.touches[0];
-				
-				Vector2 position = Camera.main.ScreenToViewportPoint(new Vector2(h.position.x, h.position.y));
-				////Debug.Log(position);
-				
-				float velocity = Mathf.Abs (GetComponent<Rigidbody2D>().velocity.x);
-
-				if(position.x > 0.5) {
-					
-					// if the velocity of the player is less than the maxVelocity
-					if(velocity < maxVelocity){
-						//force = speed;
-					}
-					
-					// turn the player to face right
-					Vector2 scale = transform.localScale;
-					scale.x = animScale;
-					transform.localScale = scale;
-					
-					// animate the walk
-					animator.SetInteger("Walk", 1);
-					
-				} 
+        }
 
 
-				else if(position.x < 0.5) 
-				{
-					
-					// if the velocity of the player is less than the maxVelocity
-					if(velocity < maxVelocity)
-					{
-						//force = -speed;
-					}
-					
-					// turn the player to face right
-					Vector2 scale = transform.localScale;
-					scale.x = -animScale;
-					transform.localScale = scale;
-					
-					// animate the walk
-					animator.SetInteger("Walk", 1);
-					
-				}
-				// add force to rigid body to move the player
-				GetComponent<Rigidbody2D>().AddForce(new Vector3(force, 0, 0));
-				
-				// set the idle animation
-				if(h.phase == TouchPhase.Ended) 
-					animator.SetInteger("Walk", 0);
+         if (speed < 0 && Time.timeScale == 1.0f)
+      {
+       
+       
+       // Debug.Log("leftspeed"+ speed);
+        Vector2 scale = transform.localScale;
+        scale.x = -animScale;
+        gameObject.transform.localScale = scale;
+          
+          // animate the walk
+        animator.SetFloat( "WalkG" , 1.0f);
+    
 
-			} // if Input.touchCount > 0
+      }
 
-	} // player walk mobile new
+     gameObject.transform.Translate (speed, 0 , 0);
+
+
+}
 
 	void PlayerWalkKeyboard() 
 	{
@@ -409,7 +378,7 @@ void PlayerWalkMobile() {
 			transform.localScale = scale;
 			
 			// animate the walk
-			animator.SetInteger("Walk", 1);
+			//animator.SetInteger("Walk", 1);
 			
 			// check if the player is moving left
 		}  else if(h < 0) {
@@ -423,8 +392,8 @@ void PlayerWalkMobile() {
 			scale.x = -animScale;
 			transform.localScale = scale;
 			
-			// animate the walk
-			animator.SetInteger("Walk", 1);
+			//animate the walk
+			//animator.SetInteger("Walk", 1);
 			
 		}
 		
@@ -496,15 +465,28 @@ void IsTheGameStartedFromMainMenu() {
 		    
 			 // Door open and stop the camera.
 	}
-  	
+     
+     if (target.tag == "plateffects")
+     {
 
+       effects2 = target.gameObject.GetComponent<Animator>();
+       StartCoroutine(PlatformAnimation());
+       Debug.Log ("animate");
+
+     }
+	
+
+ 
 	 if (target.tag == "Coins") 
 	   {    
 
+	   	    
 			coinCount++;
 			scoreCount += 200;
 			AudioSource.PlayClipAtPoint(coinSound, target.transform.position);
 			target.gameObject.SetActive (false);
+            StartCoroutine(CoinPickUpAnimation()); 
+            Debug.Log("ïsss");
 			
 		}
        
@@ -514,7 +496,9 @@ void IsTheGameStartedFromMainMenu() {
 			lifeCount++;
 			scoreCount += 300;
 			AudioSource.PlayClipAtPoint(lifeSound, target.transform.position);
-			target.gameObject.SetActive (false);
+			target.gameObject.SetActive (false);  
+       	    StartCoroutine(HealthPickUPAnimation());
+       	    Debug.Log("ïsss");
 			
 			
 		}
@@ -524,7 +508,9 @@ void IsTheGameStartedFromMainMenu() {
 			
 			cameraScript.moveCamera = false;
 			countPoints = false;
+			
 			CheckGameStatus();
+
 			
 		    
 		}
@@ -534,6 +520,8 @@ void IsTheGameStartedFromMainMenu() {
 			
 			cameraScript.moveCamera = false;
 			countPoints = false;
+
+            
 			CheckGameStatus();
 				
 		}
@@ -550,6 +538,8 @@ void IsTheGameStartedFromMainMenu() {
 		  	
             musicBoostCount++;
 		  	Debug.Log ("IT HAPPEND");
+		  	
+		   
            
             
 			
@@ -565,7 +555,8 @@ void IsTheGameStartedFromMainMenu() {
 		  { 
 		  	
             musicBoostCount++;
-		  	Debug.Log ("IT HAPPEND2");
+		  	Debug.Log ("IT HAPPEND2");	
+		    
             
 		    	
 		 } 
@@ -602,6 +593,7 @@ void IsTheGameStartedFromMainMenu() {
 	    if (target.tag == "Clouds")
 	    {
 	    	grounded =  false;
+	
 	    	
 	    }
 
@@ -614,26 +606,39 @@ void IsTheGameStartedFromMainMenu() {
 		    
 			 // Door open and stop the camera.
 	    }
-  	
+
+		
 	}
 
 void CheckMusicBoostCount ()
 {
-
-	if (musicBoostCount > 1)
-	{
-
-		musicBoostCount = 1;
-	}
+	if(musicBoostCount > 0)
+	 {
+	 		               
+	 		mBoostChecker++;
+	 		musicBoostCount = musicBoostCount -1;
+	 		 
+     }
+	
 	if (mBoostChecker == -1)
 	{
 
 		mBoostChecker = 0;
 	}
+
+
 	if (mBoostChecker == 0)
 	{
 		GetComponent<Renderer>().material = NormalMat;
 	}
+
+
+	if (mBoostChecker > 0)
+	{
+		GetComponent<Renderer>().material = boostMat;
+	}
+
+
 	if (mBoostChecker > 4)
 	{
 		mBoostChecker = 4;
@@ -644,21 +649,14 @@ void CheckMusicBoostCount ()
 
 }
 
-void CheckGameStatus() {
-		
-		// remove the player from scene by changing his x y position, and then decrement lifes
-		Vector3 temp = transform.position;
-		temp.x = 100;
-		temp.y = 100;
-		transform.position = temp;
-		lifeCount--;
-		
-		
-		
+void CheckGameStatus() 
+   {
 
+   	  lifeCount--;
+       
+	  StartCoroutine( DeathAnimation());
 
-        // if lifes are less than 0 end the game, get the coins and score and check it with the highscore
-		if(lifeCount < 0) 
+	  if(lifeCount < 0) 
 		{
 			
 			if(easyDifficulty == 1) 
@@ -713,14 +711,18 @@ void CheckGameStatus() {
 			// set the life count to be zero so that it wont display -1 on screen
 			lifeCount = 0;
 			
+			Debug.Log("restart");
+
 			StartCoroutine(ReloadMainMenuAfterPlayerHasNoMoreLifesLeft());
 			
 			
 			// the player has still lifes left to continue the game
-		}   
+		}
+
 
 		else 
-		{
+		{ 
+            
 			
 			PlayerPrefs.SetInt(GamePreferences.CurrentScore, scoreCount);
 			PlayerPrefs.SetInt(GamePreferences.CurrentCoinScore, coinCount);
@@ -729,11 +731,13 @@ void CheckGameStatus() {
 			PlayerPrefs.SetInt(GamePreferences.GameResumedAfterPlayerDied, 1);
 			
 			StartCoroutine(ReloadGame());
+
+			Debug.Log("relode");
 			
 			
 		}
-
-
+		
+		
 		
 	}
 
@@ -742,50 +746,14 @@ void CheckGameStatus() {
 	 void MusicBoost() 
 	 {  
 	     // checks if the music boostcount has reached 2 if it has it will ADD 1 to the checker and allow you to usic bost.
-	 	if(musicBoostCount >= 1)
-	 	{
-	 		               
-	 		mBoostChecker++;
-	 		musicBoostCount = 0;
-	 		GetComponent<Renderer>().material = boostMat; 
-	 	}
 
-       if (Input.touchCount > 0 && mBoostChecker > 0 && grounded == false) 
-         {
-                // The screen has been touched so store the touch
-                Touch touchMe = Input.GetTouch(0);
-               
-         
-         if (touchMe.phase == TouchPhase.Began) 
-             {
-                 // If the finger is on the screen, move the object smoothly to the touch position
-             	 Time.timeScale = 0.5f;
-                 Vector3 touchPosition = Camera.main.ScreenToWorldPoint(new Vector3(touchMe.position.x, touchMe.position.y, 10));
-
-                 transform.position = Vector2.Lerp(transform.position, touchPosition, Time.deltaTime * 16 );
+      
+                StartCoroutine( DashAnimateStart()); 
+             
                  
-                 Debug.Log(touchPosition);
-                 mBoostChecker = mBoostChecker - 1;
-                 Time.timeScale = 1.0f;
-                 
-
-             }
-         }
-
-         
-
 
      }
 
-  //  void SetAlpha (Material material, float value) // Fader to change alpha of a image
-
-  //  {
-
-  //   Color color = material.color;
-  //   color.a = value;
-   //  material.color = color;
-
-   // }
 
      void CheckboostGui()
      {
@@ -803,8 +771,6 @@ void CheckGameStatus() {
 
      	}
      
-
-       
        
        if(mBoostChecker == 1  )
        {
@@ -835,11 +801,109 @@ void CheckGameStatus() {
 
      }
 
-    IEnumerator Physics() 
+     /// ENUMARATORS.
+
+
+      IEnumerator PlatformAnimation() 
+    
     {
-        yield return new WaitForFixedUpdate();
+
+    	effects2.SetBool("Vibrate" , false);
+
+        yield return new WaitForSeconds(0.4f);
+
+        effects2.SetBool("Vibrate" , false);
+
+
+    }
+      IEnumerator HealthPickUPAnimation() 
+    
+    {
+
+    	effects.SetBool("Heal", true);
+
+        yield return new WaitForSeconds(0.4f);
+
+        effects.SetBool("Heal", false);
+
+
     }
 
+
+     IEnumerator CoinPickUpAnimation() 
+    
+    {
+
+
+    	effects.SetBool("Coin", true);
+
+        yield return new WaitForSeconds(0.4f);
+
+        effects.SetBool("Coin", false);
+		
+    	
+
+    }
+
+   
+
+    IEnumerator DeathAnimation() 
+    
+    {
+
+    	animator.SetBool("Death", true);
+
+        yield return new WaitForSeconds(0.8f);
+
+
+        Vector3 temp = transform.position;   // transform character away.
+		temp.x = 100;
+		temp.y = 100;
+		transform.position = temp;
+
+		
+    	
+
+    }
+
+
+
+     IEnumerator DashAnimateStart() 
+    {   
+    	
+        
+     if (Input.touchCount > 0 && mBoostChecker > 0 && grounded == false) 
+         {
+                // The screen has been touched so store the touch
+            Touch touchMe = Input.GetTouch(0);
+
+           
+
+        if (touchMe.phase == TouchPhase.Began) 
+             {
+             	 animator.SetBool("Flash", true);
+
+                 // If the finger is on the screen, move the object smoothly to the touch position
+        
+                 Vector3 touchPosition = Camera.main.ScreenToWorldPoint(new Vector3(touchMe.position.x, touchMe.position.y, 5));
+
+                 transform.position = Vector2.MoveTowards(transform.position, touchPosition, 20.0f );
+                 
+                 mBoostChecker = mBoostChecker - 1; 
+
+                 
+            }
+
+            
+
+            yield return new WaitForSeconds(0.4f);
+
+            animator.SetBool("Flash", false);
+
+       }
+        
+    }
+   
 	 
 	IEnumerator ReloadGame() 
 	{
@@ -885,14 +949,7 @@ void CheckGameStatus() {
 
 }
 
-  public static bool HasParameter(string paramName, Animator animator)
-  {
-     foreach (AnimatorControllerParameter param in animator.parameters)
-     {
-        if (param.name == paramName) return true;
-     }
-     return false;
-  }
+  
 
 
 }
